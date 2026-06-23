@@ -3,448 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sasha De Silva — Watercolor Animals</title>
+<title>Sasha De Silva — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --cream: #FAF7F2;
-  --parchment: #F2EDE4;
   --ink: #2C2420;
   --ink-light: #6B5E56;
   --rose: #C47A6E;
-  --rose-pale: #F0D8D4;
   --teal: #4A8B85;
-  --teal-pale: #D4ECEA;
   --amber: #C4883A;
+  --purple: #8B7ABE;
+  --green: #4A6741;
 }
+html, body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; cursor: none; }
 
-html, body {
-  background: var(--cream);
-  color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  min-height: 100vh;
+/* CUSTOM CURSOR */
+.cursor-wrap { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; transform: translate(-50%, -100%); transition: transform 0.05s linear; }
+.cursor-brush {
+  width: 32px;
+  height: 32px;
+  position: relative;
 }
+.cursor-brush svg { width: 32px; height: 32px; }
+.cursor-dot { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 3px; height: 3px; border-radius: 50%; background: var(--rose); opacity: 0; transition: opacity 0.15s; }
+body.hovering .cursor-dot { opacity: 1; }
 
+/* NAV */
 nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(250,247,242,0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,247,242,0.93); backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(44,36,32,0.08);
-  padding: 0 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
+  padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 64px;
 }
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink);
-  text-decoration: none;
-}
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  text-decoration: none;
-  transition: color 0.2s;
-}
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 38px; width: auto; }
+.nav-links { display: flex; gap: 1.8rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--rose); }
-.nav-links a.active {
-  color: var(--ink);
-  border-bottom: 1.5px solid var(--rose);
-  padding-bottom: 2px;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 4px;
-}
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 1.5px;
-  background: var(--ink);
-  transition: all 0.2s;
-}
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 60px;
-  left: 0;
-  right: 0;
-  background: var(--cream);
-  border-bottom: 1px solid rgba(44,36,32,0.1);
-  padding: 1.5rem 2rem;
-  z-index: 99;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-.mobile-menu a {
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  text-decoration: none;
-}
-.mobile-menu a.active { color: var(--rose); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid rgba(44,36,32,0.1); padding: 1.5rem 2rem; z-index: 99; flex-direction: column; gap: 1.2rem; }
+.mobile-menu a { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; }
 .mobile-menu.open { display: flex; }
+@media (max-width: 750px) { nav { padding: 0 1.5rem; } .nav-links { display: none; } .hamburger { display: flex; } }
 
-@media (max-width: 700px) {
-  nav { padding: 0 1.5rem; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-}
-
+/* HERO */
 .hero {
-  position: relative;
-  overflow: hidden;
-  padding: 7rem 3rem 5rem;
-  text-align: center;
+  position: relative; overflow: hidden;
+  min-height: 92vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 6rem 2rem 5rem;
 }
-.hero-wash {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-.wash-blob {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.18;
-  filter: blur(60px);
-  animation: drift 8s ease-in-out infinite alternate;
-}
-.blob1 { width: 500px; height: 400px; background: #C47A6E; top: -100px; left: -80px; animation-delay: 0s; }
-.blob2 { width: 400px; height: 500px; background: #4A8B85; top: 0; right: -60px; animation-delay: 2s; }
-.blob3 { width: 600px; height: 300px; background: #C4883A; bottom: -80px; left: 50%; transform: translateX(-50%); animation-delay: 4s; animation-name: drift3; }
+.hero-wash { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.wash-blob { position: absolute; border-radius: 50%; filter: blur(70px); animation: drift 10s ease-in-out infinite alternate; }
+.blob1 { width: 550px; height: 450px; background: rgba(196,122,110,0.2); top: -120px; left: -100px; }
+.blob2 { width: 450px; height: 550px; background: rgba(74,139,133,0.18); top: -50px; right: -80px; animation-delay: 2.5s; }
+.blob3 { width: 500px; height: 350px; background: rgba(196,136,58,0.16); bottom: -100px; left: 30%; animation-delay: 5s; }
+.blob4 { width: 300px; height: 300px; background: rgba(139,122,190,0.15); bottom: 0; right: 10%; animation-delay: 1s; }
+@keyframes drift { 0% { transform: scale(1) translate(0,0); } 100% { transform: scale(1.1) translate(10px,-20px); } }
+@media (prefers-reduced-motion: reduce) { .wash-blob { animation: none; } }
 
-@keyframes drift {
-  0% { transform: scale(1) translateY(0); }
-  100% { transform: scale(1.1) translateY(-20px); }
-}
-@keyframes drift3 {
-  0% { transform: translateX(-50%) scale(1); }
-  100% { transform: translateX(-50%) scale(1.08) translateY(-15px); }
-}
+.hero-content { position: relative; z-index: 1; max-width: 720px; }
 
-@media (prefers-reduced-motion: reduce) {
-  .wash-blob { animation: none; }
-}
+/* SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.35s; }
+.reveal-delay-4 { transition-delay: 0.5s; }
 
-.hero-content { position: relative; z-index: 1; }
+.hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); margin-bottom: 1.4rem; }
+h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 400; line-height: 1.08; color: var(--ink); }
+h1 em { font-style: italic; color: var(--rose); }
+.hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 300; font-style: italic; color: var(--ink-light); margin: 1.6rem auto 0; max-width: 560px; line-height: 1.7; }
+.hero-rule { display: flex; align-items: center; gap: 1rem; margin: 2.5rem auto; max-width: 180px; }
+.hero-rule::before, .hero-rule::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--rose), transparent); }
+.hero-rule-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--rose); opacity: 0.6; }
+.hero-scroll { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); }
 
-.hero-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--rose);
-  margin-bottom: 1.2rem;
-}
+/* PORTFOLIO GRID */
+.portfolio-section { padding: 5rem 2.5rem; max-width: 1300px; margin: 0 auto; }
+.section-label { text-align: center; margin-bottom: 3rem; }
+.section-label .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 0.6rem; }
+.section-label h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; color: var(--ink); }
+.section-label h2 em { font-style: italic; color: var(--rose); }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--ink);
-  margin-bottom: 0.3rem;
-}
-h1 em {
-  font-style: italic;
-  color: var(--rose);
-}
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+@media (max-width: 860px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .portfolio-grid { grid-template-columns: 1fr; } }
 
-.hero-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-light);
-  max-width: 500px;
-  margin: 1.2rem auto 0;
-  line-height: 1.7;
-}
+.portfolio-card { position: relative; overflow: hidden; border-radius: 4px; cursor: none; text-decoration: none; display: block; aspect-ratio: 4/3; }
+.portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); display: block; }
+.portfolio-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(44,36,32,0.82) 0%, rgba(44,36,32,0.1) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.8rem; transition: background 0.3s; }
+.portfolio-card:hover img { transform: scale(1.06); }
+.portfolio-card:hover .portfolio-card-overlay { background: linear-gradient(to top, rgba(44,36,32,0.88) 0%, rgba(44,36,32,0.2) 60%, transparent 100%); }
+.card-tag { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: white; line-height: 1.2; margin-bottom: 0.5rem; }
+.card-desc { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+.card-arrow { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.8rem; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s, gap 0.2s; }
+.portfolio-card:hover .card-arrow { color: white; gap: 0.6rem; }
+.card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.accent-rose { background: var(--rose); }
+.accent-teal { background: var(--teal); }
+.accent-amber { background: var(--amber); }
+.accent-purple { background: var(--purple); }
+.accent-green { background: var(--green); }
 
-.hero-rule {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 2.5rem auto 0;
-  max-width: 200px;
-}
-.hero-rule::before, .hero-rule::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--rose), transparent);
-}
-.hero-rule-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--rose);
-  opacity: 0.6;
-}
+/* ABOUT */
+.about-strip { background: var(--ink); padding: 6rem 2.5rem; text-align: center; }
+.about-strip h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; color: var(--cream); margin-bottom: 1.2rem; }
+.about-strip h2 em { font-style: italic; color: #D4A898; }
+.about-strip p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: rgba(250,247,242,0.65); max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.8; }
+.about-btn { display: inline-block; border: 1px solid rgba(250,247,242,0.3); border-radius: 100px; padding: 0.7rem 2rem; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); text-decoration: none; transition: all 0.2s; }
+.about-btn:hover { background: rgba(250,247,242,0.1); border-color: rgba(250,247,242,0.6); }
 
-.hero-count {
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  margin-top: 2rem;
-}
+/* CONTACT */
+.contact-section { padding: 5rem 2.5rem; max-width: 600px; margin: 0 auto; text-align: center; }
+.contact-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--ink); margin-bottom: 1rem; }
+.contact-section h2 em { font-style: italic; color: var(--rose); }
+.contact-section p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 2rem; }
+.contact-email { display: inline-block; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); text-decoration: none; border-bottom: 1px solid var(--rose); padding-bottom: 2px; transition: opacity 0.2s; }
+.contact-email:hover { opacity: 0.7; }
+.contact-divider { width: 40px; height: 1px; background: var(--rose); margin: 2rem auto; opacity: 0.4; }
 
-.gallery-section {
-  padding: 4rem 2.5rem 6rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.gallery-filters {
-  display: flex;
-  gap: 0.6rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 3.5rem;
-}
-.filter-btn {
-  background: transparent;
-  border: 1px solid rgba(44,36,32,0.2);
-  border-radius: 100px;
-  padding: 0.4rem 1.2rem;
-  font-size: 0.75rem;
-  font-family: 'DM Sans', sans-serif;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  color: var(--ink-light);
-  transition: all 0.2s;
-}
-.filter-btn:hover, .filter-btn.active {
-  background: var(--rose);
-  border-color: var(--rose);
-  color: white;
-}
-
-.masonry {
-  column-count: 3;
-  column-gap: 1.5rem;
-}
-@media (max-width: 900px) { .masonry { column-count: 2; } }
-@media (max-width: 560px) { .masonry { column-count: 1; } }
-
-.art-card {
-  break-inside: avoid;
-  margin-bottom: 1.5rem;
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-  cursor: pointer;
-  display: block;
-}
-.art-card img {
-  width: 100%;
-  display: block;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.art-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(44,36,32,0.75) 0%, transparent 55%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.2rem;
-}
-.art-card:hover img { transform: scale(1.04); }
-.art-card:hover .art-card-overlay { opacity: 1; }
-
-.art-card-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  font-style: italic;
-  font-weight: 300;
-  color: white;
-  line-height: 1.3;
-}
-.art-card-year {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.65);
-  margin-top: 0.25rem;
-}
-
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: rgba(18,12,10,0.92);
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-.lightbox.open { display: flex; }
-.lightbox-inner {
-  position: relative;
-  max-width: 85vw;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-.lightbox-inner img {
-  max-width: 100%;
-  max-height: 75vh;
-  object-fit: contain;
-  border-radius: 2px;
-}
-.lightbox-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: rgba(255,255,255,0.85);
-  font-size: 1.1rem;
-  text-align: center;
-}
-.lightbox-close {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.lightbox-close:hover { background: rgba(255,255,255,0.1); }
-
-.lb-prev, .lb-next {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: white;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  transition: background 0.2s;
-}
-.lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.12); }
-.lb-prev { left: 1.5rem; }
-.lb-next { right: 1.5rem; }
-
-footer {
-  border-top: 1px solid rgba(44,36,32,0.1);
-  padding: 3rem;
-  text-align: center;
-}
-.footer-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 0.8rem;
-}
-.footer-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: var(--ink-light);
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-}
-.footer-links {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  list-style: none;
-  flex-wrap: wrap;
-}
-.footer-links a {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  text-decoration: none;
-  transition: color 0.2s;
-}
+/* FOOTER */
+footer { border-top: 1px solid rgba(44,36,32,0.1); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { display: flex; align-items: center; text-decoration: none; }
+.footer-logo img { height: 28px; width: auto; opacity: 0.7; }
+.footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--rose); }
-.footer-copy {
-  margin-top: 2rem;
-  font-size: 0.72rem;
-  color: rgba(107,94,86,0.5);
-  letter-spacing: 0.05em;
-}
-.palette-strip {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 1.5rem;
-}
-.palette-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
+.footer-copy { font-size: 0.7rem; color: rgba(107,94,86,0.45); letter-spacing: 0.05em; }
+@media (max-width: 600px) { footer { flex-direction: column; text-align: center; align-items: center; } }
 </style>
 </head>
 <body>
 
+<!-- CUSTOM CURSOR -->
+<div class="cursor-wrap" id="cursor">
+  <div class="cursor-brush">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Brush handle -->
+      <rect x="14" y="0" width="4" height="16" rx="1" fill="#8B7355"/>
+      <!-- Ferrule (metal band) -->
+      <rect x="13" y="14" width="6" height="3" rx="0.5" fill="#B0A090"/>
+      <!-- Bristles dry -->
+      <ellipse cx="16" cy="23" rx="3.5" ry="6" fill="#C47A6E" class="bristle-dry"/>
+      <!-- Bristle tip -->
+      <ellipse cx="16" cy="29" rx="1.5" ry="2" fill="#A85E52" class="bristle-tip"/>
+    </svg>
+  </div>
+  <div class="cursor-dot"></div>
+</div>
+
 <nav>
-  <a href="#" class="nav-logo">Sasha De Silva</a>
+  <a href="index.html" class="nav-logo">
+    <img src="sdlogo_no_bg.png" alt="Sasha De Silva">
+  </a>
   <ul class="nav-links">
-    <li><a href="#" class="active">Watercolor Animals</a></li>
-    <li><a href="https://sites.google.com/view/sashadesilva/portfolio/digital-drawings">Digital Drawings</a></li>
-    <li><a href="https://sites.google.com/view/sashadesilva/portfolio/embroidery">Embroidery</a></li>
-    <li><a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator">Hybrid Generator</a></li>
-    <li><a href="https://sites.google.com/view/sashadesilva/about">About</a></li>
+    <li><a href="watercolor.html">Watercolor</a></li>
+    <li><a href="digital.html">Digital</a></li>
+    <li><a href="embroidery.html">Embroidery</a></li>
+    <li><a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator" target="_blank">Hybrid Generator</a></li>
+    <li><a href="https://sites.google.com/view/bearlyemployed/games" target="_blank">Developer</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#" class="active">Watercolor Animals</a>
-  <a href="https://sites.google.com/view/sashadesilva/portfolio/digital-drawings">Digital Drawings</a>
-  <a href="https://sites.google.com/view/sashadesilva/portfolio/embroidery">Embroidery</a>
-  <a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator">Hybrid Generator</a>
-  <a href="https://sites.google.com/view/sashadesilva/about">About</a>
+  <a href="watercolor.html">Watercolor Animals</a>
+  <a href="digital.html">Digital Drawings</a>
+  <a href="embroidery.html">Embroidery</a>
+  <a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator" target="_blank">Hybrid Generator</a>
+  <a href="https://sites.google.com/view/bearlyemployed/games" target="_blank">Developer Site</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
 </div>
 
 <section class="hero">
@@ -452,161 +191,132 @@ footer {
     <div class="wash-blob blob1"></div>
     <div class="wash-blob blob2"></div>
     <div class="wash-blob blob3"></div>
+    <div class="wash-blob blob4"></div>
   </div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Portfolio Series</p>
-    <h1>Watercolor<br><em>Animals</em></h1>
-    <p class="hero-subtitle">Bringing out the soul of each creature — an emotive connection between viewer and subject.</p>
-    <div class="hero-rule"><div class="hero-rule-dot"></div></div>
-    <p class="hero-count">36 original works · 2023–2026</p>
+    <p class="hero-eyebrow reveal">Art · Illustration · Craft</p>
+    <h1 class="reveal reveal-delay-1">Sasha<br><em>De Silva</em></h1>
+    <p class="hero-tagline reveal reveal-delay-2">Watercolor artist, digital illustrator, embroidery obsessive — and maker of the occasional pun-titled animal portrait.</p>
+    <div class="hero-rule reveal reveal-delay-3"><div class="hero-rule-dot"></div></div>
+    <p class="hero-scroll reveal reveal-delay-4">Scroll to explore ↓</p>
   </div>
 </section>
 
-<section class="gallery-section">
-  <div class="gallery-filters">
-    <button class="filter-btn active" onclick="filterGallery('all', this)">All Works</button>
-    <button class="filter-btn" onclick="filterGallery('2023', this)">2023</button>
-    <button class="filter-btn" onclick="filterGallery('2024', this)">2024</button>
-    <button class="filter-btn" onclick="filterGallery('2025', this)">2025</button>
-    <button class="filter-btn" onclick="filterGallery('2026', this)">2026</button>
+<section class="portfolio-section">
+  <div class="section-label reveal">
+    <p class="eyebrow">Works</p>
+    <h2>The <em>Portfolio</em></h2>
   </div>
-  <div class="masonry" id="gallery"></div>
+  <div class="portfolio-grid">
+    <a href="watercolor.html" class="portfolio-card reveal">
+      <div class="card-accent accent-rose"></div>
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDqLtir8OrpNOw_rY5uFcDk3FzonvmSAJ2rdcwxlfwun5Dv6YldrIB-ZUh9_rE48llGiRYoX2Rvmhax3vbPDtaxoFhMcqgpfguXo0wHoKGLG7zXyv4S-uIQ715V48r26WTf97cIO_NKcz-iSURiSMwnM9DbrvUSOsqhNDNQSpecDGiKXzZNEz1DKe1JV1HwFXsNC0GnkWRyZ48G0FU0C6fc6oaqqQ96dzzjMq93y8A=w1280" alt="Watercolor Animals">
+      <div class="portfolio-card-overlay">
+        <p class="card-tag">Series · 36 works</p>
+        <h3 class="card-title">Watercolor Animals</h3>
+        <p class="card-desc">Wildlife and beloved pets, rendered in luminous watercolor.</p>
+        <span class="card-arrow">View series →</span>
+      </div>
+    </a>
+    <a href="digital.html" class="portfolio-card reveal reveal-delay-1">
+      <div class="card-accent accent-teal"></div>
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBouUATPFdgP153mkLHM2CnYQA9fcybhefzzSgZt0ZB0Y4Bnsbg9HZEObb13oxIa4D2DRCP2xei6UmxdOyPkniAzPf39LVdtLhCE61bS0AuQIePU4704SR19FoZhHs8F3JByHdNMG0uC_YZI3mflEhPFD9FwSuhmXdXFfx2AP8bV-0lGPniJvKR9Vs8ZjN8o_4Ei5Lw5iLs4TvKfx__tTaihAo7sB4yOLvqlE6wQeE=w1280" alt="Digital Drawings">
+      <div class="portfolio-card-overlay">
+        <p class="card-tag">Digital · 13 works</p>
+        <h3 class="card-title">Digital Drawings</h3>
+        <p class="card-desc">Character and creature design in the digital realm.</p>
+        <span class="card-arrow">View series →</span>
+      </div>
+    </a>
+    <a href="embroidery.html" class="portfolio-card reveal reveal-delay-2">
+      <div class="card-accent accent-amber"></div>
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDva3ezEn9ulWpuLKO6Y8J7MJj_5lGD09e7mnv7tsKH8T6v-8QY5JRju-tA-UzBuOCCYGlhsk4NoY1pZe1sfP6TSs4nDgVURORrhzfXehDIxpJi_7BKnpgOf2_i9QVc0MAhrmVTq150mlaE-F7n14EjMZO0SgMsn7GnE1jJtc_9zb7HRi7i76QHxB7tZLD79LkqiXZ4oWBhbjz1eFXhKG4vPoj5QadXIVAGoHAHEvQ=w1280" alt="Embroidery">
+      <div class="portfolio-card-overlay">
+        <p class="card-tag">Textile · 14 works</p>
+        <h3 class="card-title">Embroidery</h3>
+        <p class="card-desc">Needle and thread, stitch by deliberate stitch.</p>
+        <span class="card-arrow">View series →</span>
+      </div>
+    </a>
+    <a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator" target="_blank" class="portfolio-card reveal reveal-delay-3">
+      <div class="card-accent accent-purple"></div>
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUB1KpeuBdOFFQEv3PqHP6AoXxeIMj-LpBLv4PH5R31SMwQ6RqMFlupyppW4vbCIrjk4SRRMqngkCwvR__FevCnNPLsBwhI1-HHSrlhVrc1TrQiXiu9177NvN4x_seSG4bkmXenhMidtCGa0Oe4UQW1AGCk2hhDc9mbRpEyL64YuaXz-ojhIPcH2_HV5l_RHxsOZdezcLl-5XPk3Va2I5v7aRaqKIX75JTgXP0c=w1280" alt="Hybrid Generator">
+      <div class="portfolio-card-overlay">
+        <p class="card-tag">Interactive · Web</p>
+        <h3 class="card-title">Hybrid Generator</h3>
+        <p class="card-desc">Mix and match creatures into wonderfully strange hybrids.</p>
+        <span class="card-arrow">Try it →</span>
+      </div>
+    </a>
+    <a href="https://sites.google.com/view/bearlyemployed/games" target="_blank" class="portfolio-card reveal reveal-delay-4">
+      <div class="card-accent accent-green"></div>
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDqLtir8OrpNOw_rY5uFcDk3FzonvmSAJ2rdcwxlfwun5Dv6YldrIB-ZUh9_rE48llGiRYoX2Rvmhax3vbPDtaxoFhMcqgpfguXo0wHoKGLG7zXyv4S-uIQ715V48r26WTf97cIO_NKcz-iSURiSMwnM9DbrvUSOsqhNDNQSpecDGiKXzZNEz1DKe1JV1HwFXsNC0GnkWRyZ48G0FU0C6fc6oaqqQ96dzzjMq93y8A=w1280" alt="Developer Site">
+      <div class="portfolio-card-overlay">
+        <p class="card-tag">iOS Games · Apps</p>
+        <h3 class="card-title">Developer Work</h3>
+        <p class="card-desc">iOS games and apps from Bearly Employed studio.</p>
+        <span class="card-arrow">Visit site →</span>
+      </div>
+    </a>
+  </div>
 </section>
 
-<div class="lightbox" id="lightbox" onclick="closeLightboxOnBackdrop(event)">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lb-prev" onclick="lightboxNav(-1)">&#8249;</button>
-  <button class="lb-next" onclick="lightboxNav(1)">&#8250;</button>
-  <div class="lightbox-inner">
-    <img id="lb-img" src="" alt="">
-    <p class="lightbox-title" id="lb-title"></p>
-  </div>
-</div>
+<section class="about-strip" id="about">
+  <h2 class="reveal">Art made with <em>curiosity</em></h2>
+  <p class="reveal reveal-delay-1">I'm Sasha De Silva — an artist drawn to the animal world in all its forms. Whether I'm layering watercolor washes, drawing on a screen, pulling thread through fabric, or building iOS games, the goal is always the same: to find something true in the subject and bring it out.</p>
+  <a href="https://sites.google.com/view/sashadesilva/about" class="about-btn reveal reveal-delay-2" target="_blank">Read more about me →</a>
+</section>
+
+<section class="contact-section" id="contact">
+  <h2 class="reveal">Say <em>hello</em></h2>
+  <p class="reveal reveal-delay-1">Commissions, collaborations, or just want to talk about otters? I'd love to hear from you.</p>
+  <div class="contact-divider reveal reveal-delay-2"></div>
+  <a href="mailto:hello@sashadesilva.com" class="contact-email reveal reveal-delay-3">hello@sashadesilva.com</a>
+</section>
 
 <footer>
-  <p class="footer-logo">Sasha De Silva</p>
-  <p class="footer-tagline">Wildlife · Pets · Wonder</p>
+  <a href="index.html" class="footer-logo"><img src="sdlogo_no_bg.png" alt="Sasha De Silva"></a>
   <ul class="footer-links">
-    <li><a href="https://sites.google.com/view/sashadesilva/portfolio">Portfolio</a></li>
-    <li><a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator">Hybrid Generator</a></li>
-    <li><a href="https://sites.google.com/view/sashadesilva/about">About</a></li>
+    <li><a href="watercolor.html">Watercolor</a></li>
+    <li><a href="digital.html">Digital</a></li>
+    <li><a href="embroidery.html">Embroidery</a></li>
+    <li><a href="https://sites.google.com/view/bearlyemployed/games" target="_blank">Developer</a></li>
+    <li><a href="#about">About</a></li>
   </ul>
-  <div class="palette-strip">
-    <div class="palette-dot" style="background:#C47A6E"></div>
-    <div class="palette-dot" style="background:#4A8B85"></div>
-    <div class="palette-dot" style="background:#C4883A"></div>
-    <div class="palette-dot" style="background:#8B7ABE"></div>
-    <div class="palette-dot" style="background:#6B9E6B"></div>
-  </div>
-  <p class="footer-copy">© Sasha De Silva · All rights reserved</p>
+  <p class="footer-copy">© Sasha De Silva</p>
 </footer>
 
 <script>
-const artworks = [
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDqLtir8OrpNOw_rY5uFcDk3FzonvmSAJ2rdcwxlfwun5Dv6YldrIB-ZUh9_rE48llGiRYoX2Rvmhax3vbPDtaxoFhMcqgpfguXo0wHoKGLG7zXyv4S-uIQ715V48r26WTf97cIO_NKcz-iSURiSMwnM9DbrvUSOsqhNDNQSpecDGiKXzZNEz1DKe1JV1HwFXsNC0GnkWRyZ48G0FU0C6fc6oaqqQ96dzzjMq93y8A=w1280", title: "Hello from the Otter Side", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUCKB4Pt5_g_OkUU6QZD85T4EGgzYngHvetBVNBKywZNcMnp-akaiDzKAQyKmFT7JB080Ew3d7Dvigluy2Gq2CidEQdIL_dJ9Sy5QmkeuWNRPNwgnDZv6gw2MulKziwwBRNOPBzrXl1rikfFfrQNkFy6ZV3CKpt6ViQZunN84KNZesuZaex2Xot1oMPPu9BNXpuRLfLR1rjcFnL9AHaCLDqs4uwWVYBkegp9PVH7WLw=w1280", title: "House of the Dogon", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDJ1PsLD8qYL6s71Q3XwoujNgLi3BL1PDHTHgLn5aj3Dp6KvenSI2PQXv7R6YVQWPsFKGva7zwXzCjU6qAFhjJ8CcWBX1aTdVE0Z-H7FE6AttJMtwF8p0BkzU4HX8EvDrEPTOiyVnk0hhio0H1T85Ut9s76tVjZBLRpb_xBBNtOyjY2uZDlJT57vJ7tp9L5I_9sb7YYKdU_MYvDwLPuZ8gGy3LCBQMVU-zq3iN1n-o=w1280", title: "Coral Cuttle Buddies", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDpYfvvhbxWrFvivDdRI65_qSmCt3r-BxI25NygMbD0hI0ZV4hFXLwGmhV-KiMVXYVMEAcfA8Lvi_x4z0gfihitkeGAGQnBzn4OUVl-gzw7jlxiJXKKMOQtgN5pOLyPDIEpMTK9ov0ARZaaebOpCY7OOONdE9kz0nJQEn-uc4a8A2s22T5UI2GoucqY52WuwJkrvSiOCnwMB2Xd_8xuREwVEjnIMnXgP2EkPgUw1aY=w1280", title: "This Little Piggy Went to Market", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUBj5HEpXuA87w-THRAAEYvZpSHayfzfpedUP2KAPpdsDpwNb3hgi-z7chgskYcyy3HzVH5ZBU2aWxElkEu_RhNAkq6YfvJZDbvuiHbxtK2HrTmtwVjgkZ8InV0keu4_Ceiql4pzTWVm7N25QTa4FDOcXmNKj1uvIOZ3ADkjdk8eOlI4sqnef5BmmkOT1i2rruxuZHsd513_6dyuPRmZX=w1280", title: "Lone Shark", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUD4F7q06kR_jMZvbThvYilbgfqs7hFs15Swy0iudcvvZWhXzgNmJNmefVc5f9DntHbNbkMmNNPuPKs-EujzH6IWX8AoHGQf0w_3_tGGFLo9yUzcws4iV29DhOQi83A4Rag95Hf9zhJqWXj0HdvByZLpfqWtEgaEA8lzqZJwVGb8esDx1BLPET2_QFaYlMfg57AldyPf3RP0L2837om-UeqV7UCefgOwxQH1f_qt=w1280", title: "Sunset Ladybugs", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUBm9UICyAdSHwngEJ9Bb_RBLvVRbPDfMdrMSHDHJK9kSs5b6g4HTvYbfCMY2gJPiTEhoZ6SZloWBnh3uV8X2MQ-8XYuxxEwZ-B4z_LLB7FhyvRR1_o6Xl91KRcZKAZk-3Y5b5mZSuuHi7-Bu_Jb4HfZUKOCNcU_W5jXi_kG3yvOTln2yS5ZSWJXolGpPPszQWlArgbWBzJkahFUYyjQyTczSEwkOXgskyWaTHIFWnc=w1280", title: "Polarizing", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUARrvoyCsrcBaVpka5zISQj8WHOxT9Xb0FvGpaOlwJzqGbwk3zyJPTrMr9Yr7h6s-S5_UAUNKlrjh-wgC-WXU935t0L_SPzTeq6x5wdIOaf4lVMH8XXLflrMXzOEck0ta2jQK6EKd959nsoEaH7zrcE0BiFTdtNuXu38D9yN9Duy5i-IqvEo6yASki0EMGbOudjwLHqonpbVJ047WyzYBEf=w1280", title: "Hump Day", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUC0bu16KnMDl69o7IbZqx8nQ0UAMVcdheJEYU27V0NXu7f5CAQn-kJmXCqmgwPeG_oovGXaTfQPdnxErnIMCgp_ZZRrKphms1ICUzInPhdxgktSdZ1JeS1G9UvEfDlGf-HbcO4Y5Cp2SM0H6JVBGHB171u86cuv2FaBEgwjXeLXvC4UddQUtMvYrXcQb_OEA-Zyt-TXnOewTbhoKoM2kiVFMe-rvjyD84C46odi0oc=w1280", title: "Lavender Dreams", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUB1KpeuBdOFFQEv3PqHP6AoXxeIMj-LpBLv4PH5R31SMwQ6RqMFlupyppW4vbCIrjk4SRRMqngkCwvR__FevCnNPLsBwhI1-HHSrlhVrc1TrQiXiu9177NvN4x_seSG4bkmXenhMidtCGa0Oe4UQW1AGCk2hhDc9mbRpEyL64YuaXz-ojhIPcH2_HV5l_RHxsOZdezcLl-5XPk3Va2I5v7aRaqKIX75JTgXP0c=w1280", title: "Party without a Porpoise", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUAeu7obFXM0ztR1GNr4Ndrp-4FOiwqHUwjg157nDL0NG0x0mxx5hfvnsx1uMEDiu52R-EwF15G5Mm-F_Z_CXM6wcgS0WqVqNTt-JGASECTL7oYQyVIM3Gwtm0CnBx9bj2rZ1VPPf1l_hVQhzUkCNINh21PTH41pbrIMPlNxTfPbDHXrVt9W88fquc-cV2AsGxehBVtyb2q7TXfRSYD6eRPHnkdmFTwfAGh3SNHg=w1280", title: "Piff's Playground", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUA4Y-0a9hDFgRhH4KQsQwwYCZWVT81lTbGdQ2ZB3GO4knFB822P6eGQYFMx681WzZUWx5KdnqUUomxmocl1zmGwB9picKXX7yPrYxkZrjBSvA4SPcWe_Ix4AyH351Y273kqJ1LcLOKPcCTonzjDLWpbD3yS_5qDrHD9zZvAhXgsf4phP1mTqGm_GF6LIzMEUn12AeE5dgHl5C4Nek5fuy8rvm5azBJHbfRh2CHcZ38=w1280", title: "Giraffe Manor", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDUs9-7TMmDnKJWbaJL_s-yqELvo3bcFd8g2rYqma6fuW2C_PHX17UjTVgDDze2mM8mGBwyAfwKO6O42VbWK6lVe8GW5Dgx_JJgnK87zMcXsm5J-UPMgRIqZGmC8rjwtTyX_m71veS8pOn5AQ9PKgE-hRO_jKCj1ggosmX6BrT7AX9jBddYpKhP3sOrMKh4cae98DJ0_zssagEEPghWNbEOV0ZxzM6HKjdwnwRn=w1280", title: "Dahlia's Pet", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUCitNrZXVFJbP8HZb54_QwvHXbmALCIDveRAIqVfRsIv2_g-wk8LOPuCkaoHsvx02CD2Qadu7qW4k2CiGAnI4JZ6bniPR4eeTtI8xoaXbUrrJXs6ZoI9ZHgWpliN_eW7-RyBbzpA5GpZD_sfEYXYdOK8qDMyHbw6k10p1E1k4iDUyMQIfSIg--WOOkC9w=w1280", title: "Ruff Rider", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDHMVfrw5Oe06q1nNXCq-7FIMrYs9uYuZhZtalgiIpW4rhBtu3qnkCXiw4aHUug3stognnXpjeq3CUqArkGJPidyrNXA3zLz6SZCu-hu642za0t8jRAy5kE5Ct37fTGGAkUcdY0drWhaLnizccTlV7AyalXveqLEgI_gcjHtnRpY2nfWyViY6hw3O3sGcMoJnNzBY8za4px6s6A1Od5tOO1q4R1If2aseFfEg=w1280", title: "Hello from the Otter Side (Print)", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUBvdWZ7ipw31D_sIB6yOjoR2-P2JfzVzIWgZfAauYvE8m1bFSP-OWwpsAQJPW_0tNS4x09MxGvyxZBuVngw6DpaXfkkONyEL4VGYZVlJn_-BoJ9K7qi42-A9RM7rS5FAy-1Rk07fYQ8poy4FOwf50eO0vgyZrN8TxJtzk7lFhuNvNvNlEoM7URcXa7uTN2GF99uAa3fsYYFz942sXp3ukmLA7-_9mgqOJfSUMF9=w1280", title: "Crimson Camelflauge", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDUoKyDTKh_Fy0x2O3AhwwEDySlaaB7KkomL2wEW7FV885vzC8r3uinThzu1mVFv-9J1BGg6NNYLIHC2pAwo2n086A24Nzcf_owGnIopJ5YZsQqSpafNeQ2J_ILYkz62mhiOhG8F-oACb7sTJ48BEG6mL736RUIp5AvoySHph4-Fwl0RimhEQnhEwyTmyHzpJdF1Yq0LXoC6FerBeiw90Q4q8-7K4firJQQnL0C=w1280", title: "The Mane Attraction", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUBukuc7O4ocRNRKcW5WAeb__KVurE1DrnPIsWWKd0up6WuIT_ljyROu37b4iNtIR0fg-UYc4RiKyUtGjWKPpA8BY2MT-baBtU2rwAbH3z1Ka74aYQ8gG0znriKKXldYwkQuG5WfCEqvkr6sdnCfbd0Yiwe_wC6hx7ia6sTqSLapRvX9jUidmOvO_xP4--p-AlTuKkKqcLTSjKX_4mvw5TIXks5US5fGPMzzrcvH-x8=w1280", title: "Menstrual Kestrel", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUAJDe9WM8RTATGSobyelI9ZBaxiEeLAI30k1Q17YeybfNyPO-7RQistg0TMbAxAZ9A3g0PlHJyva8X8Kh6g01697XnYutV9rdQv577WEHaAXoMYHTZZRizyJHUdxNgKLMvuULp15AnAotWkcKwS0Ba2tIbj6ZMx5dEERn7d2riQXfIOnUpp69gXvs_J841o8GAAL0VeTSKPfsV6OW0FrEhy0OwgUIR3cP7G_Yqc=w1280", title: "Wild Companions", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUCpP9x2gRZFJHgNnTC_AMW-lWQlWO6khrMczBv3koxyTxA_2EWYYT9pzBNi6QQp3opF4eYnUFijA213T5dti1mDhM-eudYXmzpScwdqyJoQ4jBeyiDmz4na3l6YM8tFcT1y9hwBv7HCQqD1VqpDZtTBN0NAvt866-fQEcVkZEls_KokAs0fKCbgvoKPEUvzF9LaqBo1se67efNwQ_a0L2i2PjBzLVRwtISxcAGLGPA=w1280", title: "Garfield and Pookie", year: "circa 2004" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUAo-rK82Zpbt_BF3npH-RyiVW8SDqOw0B8HplJ-f5fzbfrrQvl8qAOdLMlCPug-5NQsofAQ1apuonH1o0JCl39UA7-Q3H0A9iPKm0L68ioggb4xm_laHBYy7TbiXwiA_Uk_nLKtJCTFn0xkSyOlDoVPAoKPBwabLecCID_3DFG9OCxe4bqW7ixBSwyCr9UJrQ6CZt4E_VP0aAGfa-Tqe8WI-YF-TrHTFzEywHcJ=w1280", title: "Paco's Trip to the Aquarium", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUCLKZeN4mnyT10ffhdRTBWYI-vqO9GXhkI5TYWj0GM0We-XIZnJqfrF8kMsKXcjy50Q6whDUqMCZdyL4p5Hi2WIhhsKZ64_AzFZgUaQlix89nNaGKU-H9f7_A6ZKOKUJ9YPznieIN6BtIYeejYz8UOCQem9vEvstNamKlo8bSHJeNwyjMSJA9Uea96lUtvwvquwyyhR2NCn6zeRkpriA8bGzZWxERr1VvnvfBZB=w1280", title: "Chicken Chicken Me Love the Chicken", year: "2023" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUA5Wesyf5_L9Nunel3kDavs4Dlvi4-EfZ-amvyDQJXwWcEKLXWwQgIVAOVxyQsucEwf4-LEMVxFNw-j4l35hBI81vmdozJiGOnCTmtwJujtqxUYCDidytSbbPjP8OaCRF52A8JHmTepuTzLlkvxNC6jdXwhe_VGHFDURFqsv7CkmMx7_nDx6AZSnLC6gHRn_VudpR1JGIbSPg7YX01DqZHQ_a-xVGd2_7LDAiLj=w1280", title: "Rocky", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUB0Z2pFJSN4V5NPwUMd7DVZGRDsB29_0M5gRCwK2jmT8OKzh-ogZaigI9pVyKvkMAxINkEgLV9IKM35RAPVtgqd7nP_J5ine-IcksuokIiKun9MuIFGcXvVkLnSSeD-FKu23x21ozBKRFcuCmuK5Oy6qYlw4Zk5kWUuwAqgrcmbXsR4SX4Y1R1pnQ0YuOSqd9NW-h-dymdsBx44m_V7yaSfCmGKA0wcNm4UD1M9zfo=w1280", title: "No Drama Llama", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDSNKmXwQHPb_ByGCZgi9kLbDN2tU9YJn8VzT9SsedghxPD3fkvfdzGKgWoKbXF0w-iFsiyx5yVTi2TNWIznjEMog_t92FsbY-guktkTtcjNRiCxRmbERqhiHK_YlS1s=w1280", title: "Chill Cub", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUB3VVP7fZEl5P9YCNUTwt4A1TwM502nka3PPzwVcyccBcn_TBE4x_O-T9hRY88zn1Cx-LRM-0tUfAHNAbjX9u5zYvEFw9UE7QF6oAnfhEEb5HdugxeEIMxYMtxhCluEOMYWIf9Ia8CwCIlLB8mOr09rPxAg_HEBXVy-Yo4k2f9QXZjbCDkWblcDGnlNak0hn9ivFZwhXK1mSFCVrEpDRXA04zMIy5Xr7KKdiSBuVYY=w1280", title: "Domo", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUAE6Sp_iA783dHN_xompmvawc-mgiwHsDhtNbLRlWmExghegp34SidvzG2OrQNaMIMJCcvW0dzeTmXY0W6D4Gvvn-vnS_mVTTHcc7dXg8P38BsfEuYeajn_FN5ADhPb5NvfUEmyv2mzSV-PhuynXpXano53WhvSkjyntsrcyR22gC4YUVhokg-v1K5SkvtEm6BZVKz3Xk8I8s-tXWTR4c-TEBfWgpXLNeh0LTDs2eg=w1280", title: "Octopus Prime", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUC8XvZ0XkTh67lDD68W_Tg4A-kbvtwk3zbfXz6p61cNwtceBAV-jf8bVVZ5DsAQh57dJ2PbXJyAT6YFnrFgcU8vuprvoYMzih4h3kSTJkIKnpJZsFJmJteXsKKCJshN3ToOdr8FP1sUy1LrGxuwTv4NQGMipLg9CtygtNKOZc26LtEViVvR_80_0aZcwBxsj2cC0a2dChEs54iZ0BJzk3nCcOYahwegdLzzkh1I=w1280", title: "Orca Clause", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDw9Hds-7YjBFMleqxrg5N39pHcCpsGN05O4oEA5YcvyjrrzGbCuqSSj4OfcXP6YXIDTCWL_42gmCpF1nY8xjVJWSPAk-OnyuadfU2fn5-zYWYLGyA93LWGnCERf2zy8TU9K2n1SQYDlKM0jcl9q0G8y29K7E3fjtkFX8W3ohNhmMaYQNG8fLCi9C-ZFnY6kp8avA4NquyKDu3PDG1r9HV-0ZJTfLUVHcre9PbZj84=w1280", title: "GOATed", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUD2LJhd6MgMyQxQA1FcY2iBNwv5AWA1OTBSOg1w9jVsS8eNVIPgbMao4M2CzGEjxNqIY1xIj00012S3Bdc2EKuo3R0yerMfggeraYFYanVN5Awo-xz3xtryp4QR6317_qWSzsaYnuX0FGEeXWzbV8hIfzb_MYZWhsdy5W_ECdd8RoSRFEyWaL5hqJaz3FJ74Q1UEEaqjRxxoYfOAl82VpLhbjcMJoABBoF0oKcehqE=w1280", title: "Bear-y Nice to Meet You!", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDhJdKNEx0m7WYiAILIKeVncRWcMtL9l1h-esBvM64DSiMmTAG2Vp8sfhi7vNycCqE-q8AxlJ_OeKt_6u6SejkY0pX7L-PK1aLJyPLjJ93SoDEAITvA-zfqpCUDoNYgtyu-2Gg_RqglqQNhrJSQQaCXweQDJ6XLtpZgiTwE4k3-EX3E8GaQvNe8BzZLgo_GoTDFxX5CFTov9YbP5AGiUO3EvKS1cGrcaBYdvG-9Lso=w1280", title: "Purrfect Winter Day", year: "2024" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUDMzPMg-eoyUnJB2wyZwpNfx-NaoZRlVcPcIXKtaKi8x5bAfy6w0FYwwDJNrX9faBRg583e3EgKKpSZRaVtLNGzxvz8xNVXfw4be9kI8sUZ61FbLqsqnzG5r0OMWXGnioMZsxp00OJP6I_IuLisfB0U63cDmSbiCJDl3IEqecOAe958HDufmBq5gmy93mmWf4Ys5uNAPwX2FWf69kVIUpAN03_Xg0JYaDKDN2j_15I=w1280", title: "Owl Be Home For Christmas", year: "2025" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUBzilH6BEZssebE7HUIvMtX2HgkFaZmG8fwtaUOzISZ_4CXFiKmUC-mfBv4QkJNOtjbvEnObvRl038n4yX67Jgy6SEkgg5d6DUjB6fsw7_s80AqA_G-ddH8_RvmgGjYNjaVJODqAleTtI8xoaXbUrrJXs6ZoI9ZHgWpliN_eW7-RyBbzpA5GpZD_sfEYXYdOK8qDMyHbw6k10p1E1k4iDUyMQIfSIg--WOOkC9w=w1280", title: "Hoppy Holidays", year: "2025" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUBEDY77LTfPxsD4UqJEN6DgO3FcR_wVefYj0CEP2dEBoRbSc7_W0AdcHoS1Tf7yVm6tvYlMaHSmd7mzT_Oxz6RNM393HrS4w4f50REm_mhuVsRXJ3ox2TZJB6-E1XtYJHmi9Z4LLkJKiIPsB-FUSv2T5zkZN0NFJgKuuiodexq4N8VmgwonPlnJhbkP5pz8zXU4J0i0_ZRpJzJY7W2GmOHh8JSq-c7A3nsiAQSlY84=w1280", title: "Moo-ry Christmas", year: "2025" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUANnExx9jBapnJmYXkHgiH7KtCYMVdIKX_3qJ3vOtvUF147FmCI7R1cJ3ZndXtpDUCYUc0Xfkg9s2PByZ_ZdyuPLmHyKBjKKAq1apuonH1o0JCl39UA7-Q3H0A9iPKm0L68ioggb4xm_laHBYy7TbiXwiA_Uk_nLKtJCTFn0xkSyOlDoVPAoKPBwabLecCID_3DFG9OCxe4bqW7ixBSwyCr9UJrQ6CZt4E_VP0aAGfa-Tqe8WI-YF-TrHTFzEywHcJ=w1280", title: "Raccoon", year: "2025" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUCEbGEXEfcDtgnVd2qikDoPVuNg2PHIeS8Oh0pRbELSqzxYUBrsCjp44-56jRCHss15k06vHv75jFEfESFxKEArHcPW73BeEvkSkdq8VGHFQqD1VqpDZtTBN0NAvt866-fQEcVkZEls_KokAs0fKCbgvoKPEUvzF9LaqBo1se67efNwQ_a0L2i2PjBzLVRwtISxcAGLGPA=w1280", title: "Lion Around", year: "2026" },
-  { src: "https://lh3.googleusercontent.com/sitesv/AA5AbUAzEbT9fxHluO8KJBBnuFuzLaJFtkJ00fqFAGF7MdmuBlqfSlYzsU4kqtKSBlMiX5B8dssCLq6DHbgLiDaAKAQ2hf5qISI1IVVAljIqdM6tOcdU_LdiTOq_u9zkIDipGuRNWlkWfDLLm2OlYtTyZ5myM3BYvJW9i4JEFukpROonRlLFoLDF1YPlOuvrQ8SQ7TNmdUuHSYf7k-5DAjKpd1d46pflhf93c1ROUjhe=w1280", title: "Horseplay", year: "2026" },
-];
-
-let currentIndex = 0;
-let filteredArtworks = [...artworks];
-
-function buildGallery(items) {
-  const gallery = document.getElementById('gallery');
-  gallery.innerHTML = '';
-  items.forEach((art, i) => {
-    const card = document.createElement('div');
-    card.className = 'art-card';
-    card.innerHTML = `
-      <img src="${art.src}" alt="${art.title}" loading="lazy">
-      <div class="art-card-overlay">
-        <p class="art-card-title">${art.title}</p>
-        <p class="art-card-year">${art.year}</p>
-      </div>`;
-    card.addEventListener('click', () => openLightbox(i, items));
-    gallery.appendChild(card);
-  });
-}
-
-function filterGallery(year, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  filteredArtworks = year === 'all' ? [...artworks] : artworks.filter(a => a.year.includes(year));
-  buildGallery(filteredArtworks);
-}
-
-function openLightbox(idx, items) {
-  currentIndex = idx;
-  const art = items[idx];
-  document.getElementById('lb-img').src = art.src;
-  document.getElementById('lb-title').textContent = art.title + ' · ' + art.year;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeLightboxOnBackdrop(e) {
-  if (e.target === document.getElementById('lightbox')) closeLightbox();
-}
-
-function lightboxNav(dir) {
-  currentIndex = (currentIndex + dir + filteredArtworks.length) % filteredArtworks.length;
-  const art = filteredArtworks[currentIndex];
-  document.getElementById('lb-img').src = art.src;
-  document.getElementById('lb-title').textContent = art.title + ' · ' + art.year;
-}
-
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-document.addEventListener('keydown', function(e) {
-  if (document.getElementById('lightbox').classList.contains('open')) {
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') lightboxNav(-1);
-    if (e.key === 'ArrowRight') lightboxNav(1);
-  }
+// Cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
 });
 
-buildGallery(artworks);
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// Hero reveals immediately
+document.querySelectorAll('.hero .reveal').forEach(el => {
+  setTimeout(() => el.classList.add('visible'), 100);
+});
+
+// Menu
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    document.getElementById('mobileMenu').classList.remove('open');
+  });
+});
 </script>
 </body>
 </html>
