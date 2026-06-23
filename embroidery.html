@@ -53,13 +53,16 @@ h1 em{font-style:italic;color:var(--amber);}
 .masonry{column-count:3;column-gap:1.5rem;}
 @media(max-width:900px){.masonry{column-count:2;}}
 @media(max-width:560px){.masonry{column-count:1;}}
-.art-card{break-inside:avoid;margin-bottom:1.5rem;position:relative;overflow:hidden;border-radius:4px;display:block;}
+.art-card{break-inside:avoid;margin-bottom:1.5rem;position:relative;overflow:hidden;border-radius:4px;display:block;background:var(--parchment,#F2EDE4);}
 .art-card img{width:100%;display:block;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);}
 .art-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,36,32,0.75) 0%,transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;}
 .art-card:hover img{transform:scale(1.04);}
 .art-card:hover .art-card-overlay{opacity:1;}
 .art-card-label{font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-style:italic;color:rgba(255,255,255,0.85);}
-.in-progress{display:inline-block;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;background:rgba(196,136,58,0.85);color:white;border-radius:100px;padding:0.2rem 0.6rem;margin-bottom:0.4rem;}
+.wip-badge{display:inline-block;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;background:rgba(196,136,58,0.85);color:white;border-radius:100px;padding:0.2rem 0.6rem;margin-bottom:0.4rem;}
+/* Placeholder shown while image loads / if missing */
+.art-card .placeholder{width:100%;aspect-ratio:1;background:linear-gradient(135deg,rgba(196,136,58,0.08),rgba(196,122,110,0.08));display:flex;align-items:center;justify-content:center;}
+.art-card .placeholder svg{opacity:0.15;}
 .lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(18,12,10,0.92);align-items:center;justify-content:center;padding:2rem;}
 .lightbox.open{display:flex;}
 .lightbox-inner{max-width:85vw;max-height:85vh;display:flex;flex-direction:column;align-items:center;gap:1rem;}
@@ -106,7 +109,7 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <li><a href="embroidery.html" class="active">Embroidery</a></li>
     <li><a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator" target="_blank">Hybrid Generator</a></li>
     <li><a href="https://sites.google.com/view/bearlyemployed/games" target="_blank">Developer</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -116,8 +119,7 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
   <a href="watercolor.html">Watercolor Animals</a>
   <a href="digital.html">Digital Drawings</a>
   <a href="embroidery.html">Embroidery</a>
-  <a href="https://sites.google.com/view/bearlyemployed/games" target="_blank">Developer Site</a>
-  <a href="index.html#about">About</a>
+  <a href="about.html">About</a>
 </div>
 
 <section class="hero">
@@ -152,7 +154,7 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <li><a href="watercolor.html">Watercolor</a></li>
     <li><a href="digital.html">Digital</a></li>
     <li><a href="embroidery.html">Embroidery</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="about.html">About</a></li>
   </ul>
   <p class="footer-copy">© Sasha De Silva</p>
 </footer>
@@ -166,26 +168,65 @@ window.addEventListener('scroll',()=>{heroBg.style.transform='translateY('+(wind
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 document.querySelectorAll('.hero .reveal').forEach(el=>setTimeout(()=>el.classList.add('visible'),80));
+
+// IMPORTANT: filenames below must exactly match what you uploaded to the images/ folder.
+// Spaces in filenames are encoded as %20 automatically by the browser when set via .src
+// If your files have spaces, they should still work — but renaming to no-spaces is safer.
 const artworks=[
-  {src:"images/embroidery01.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDva3ezEn9ulWpuLKO6Y8J7MJj_5lGD09e7mnv7tsKH8T6v-8QY5JRju-tA-UzBuOCCYGlhsk4NoY1pZe1sfP6TSs4nDgVURORrhzfXehDIxpJi_7BKnpgOf2_i9QVc0MAhrmVTq150mlaE-F7n14EjMZO0SgMsn7GnE1jJtc_9zb7HRi7i76QHxB7tZLD79LkqiXZ4oWBhbjz1eFXhKG4vPoj5QadXIVAGoHAHEvQ=w1280",wip:false},
-  {src:"images/embroidery02.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB2sMs9yktGu3PPHaaQixYOxlx_R4mwnGXD9p9rfHSfkavmOrVltj-8y931-MR0rxtX3ROYyEoQLemm7iorhERFlNKFA3UW1KSiBVDdJFo5oht1eukJalM28-LttsIoudt-TXCC_MTfE9deUa3Xk69e3zc9dEYMj9engQ3Dvfd-uhbypcFu1Jv31dYNDMgHlmQWCsSn5aKGc6tu65JC8_IO1TAKXn7-DhwycemzUp8=w1280",wip:false},
-  {src:"images/embroidery03.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAcNyr62wisIgcYA3Tbf5L94nyVoxYP2HDLLWHkbnerMZpF5Gi_JXkaZ8ef_rL2F8rdcLs57evENz0q4bC1IUV03oG4dkQiaGlkPyycJK5hNaoE8ftBwc19ueXmY4B5AdtTkK3k16N_qAOiPgBeDCih1hQ5vrgWsg1nC2BfI1q2a-ZShotHWitRbB1Qa3hGUWCHoTy6uBDaU-ddWYpV_v16zj3G7uAadrxj6J9FTe4=w1280",wip:false},
-  {src:"images/embroidery04.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB6aItwpL0lIG6x4OSl_DAfiuzqscLKZs9HNRq5aah-xqSsy1E_ZOTEyujVREHTcPwtlZqUVBmYeN9mF7Cx9NU-LAMPfrO5u4rmRBtX_72wPOA-PBnJW_4wNrbxmiBp-w2QkrtPmXLTMfvHcyKTbTuafAPmtvlosK_A57eUQSUBW_EBmQMe7WFFNgMXTQt6pLQ8RGzLuFyLbtL_Z5rwqR7C4LetLWtJFjT3dT4gs=w1280",wip:false},
-  {src:"images/embroidery05.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDLG72nmIDTeygSBINyuBC2KYaSvXosNWf0WKnCcertzpy_8UuZgFYfeDEHUhfm8vQaCoFHIcBYXF1g_pGu8vil2g1UqTHAd0rH-hLchaxXQSkZfEqdNuq-gQmoSxFulFVrXyhEAeFKsn7CkjBjxLqtS2XlhNDa0nBjxB8NZXHRX1C794oXPuv31SEOITo7ayRybZ-OFaK3HJYLRloHexcnrxP8vxNXsNMxRPNTaW4=w1280",wip:false},
-  {src:"images/embroidery06.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUChNc5aRwqIgTjIONTbjJUlsSKy7lkv0dI2QjZ_9NUQXfH9QDqmidvRNy8fzSTuDHiVh03HFwt8yDmTvfCAaiA5xDlepEIY1mbuBAfb4H9ALbPIjuBoxkqYOQwi2SbG0YQyz9g23cRbtrmzMNkH32OYFTKmEM3SzYRdPA1L0VWfstBuVU8YioKCZhiGrtnEwjBxRB_xV_EhHapXu6xb48zfvEumx7C1MZSuy5hH=w1280",wip:false},
-  {src:"images/embroidery07.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAjeMmJYNDZmMqwMlqcqKIRvS5R6VQ3eFj3UdqPFjxv-eKwO_pDKfFQcTVrOzHD5INd2-wE0JCxqNNl_ZZ9rdPlrwWneAA46DjJ06xB2wS4IJDNiBRTqEA2ET5xk1jeBZdLeJtGMb56TC3d9S7xISp3qoh8q7oEyxwMvcRWf-eNyVprR35kQhR89iNv7Uu2TADnJHnEzxXCTmyagmFsPYR2vbAEgGBwZPmHbg=w1280",wip:false},
-  {src:"images/embroidery08.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCgo68orA8g89GdeSga0MGs73oLunlVws-v-MGTLu4VKriVl9yurYDdAUAJtXP8_ebNeimT_UZ77GycvP2MQ5HxPO3AmpPdiUE1WF-rFvfHTD82XIIcAteKF1XhAvzMcXdW5m5RkeD8lwQjdUaasE930GfKZ0vMQmtp80arMgjdkxDV15V_5VSA6a7kYUEIQDdFH7ZSV7_dyIke2w-6HOw02LQqMysJkKq7H47OTFk=w1280",wip:false},
-  {src:"images/embroidery09.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB6D8emQXplygcyY29QjagV-4zywQJupfRFjiWTm_GCxK37sd7RO99xsDl8HtsqqF2gcPnCAWLu-aheraHAv4tgdamIJTZ5WWivJIX8nH5FputFCAHizgM29zw7tj9WI-qfe4zUUK5Vr8jKtUxN2gQAn_Y0eJ3YnHm_yBUwrAu-u6T-jxbuZpaqSy7heAWxRye7gmUrGg-zQLnOO1B_s9rtQ3GmwgxvAVkSfoKdgkk=w1280",wip:false},
-  {src:"images/embroidery10.jpg",fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCRucuYjJOl80mIi6hQodSxQABhV-IfgSnG0cmL90WrFIGcuaXmakAa4n96_eHTRIyLzRAE6QWgdCFhwKrJwdErl-3fzfxhQVJjn_cozWtyeHqhSDM-aDJIH6fQLX5G1gY2DzOuyluzx31JD40SgKENshiydy9abcdrvRMIdEva8uGKbWPk08XEIDcX4VHs5mcOQest_scWZLKMiOwGrtAg8JAHR1wmUkbYr20e=w1280",wip:true},
+  {file:"embroidery01.jpg", label:"Piece 1",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDva3ezEn9ulWpuLKO6Y8J7MJj_5lGD09e7mnv7tsKH8T6v-8QY5JRju-tA-UzBuOCCYGlhsk4NoY1pZe1sfP6TSs4nDgVURORrhzfXehDIxpJi_7BKnpgOf2_i9QVc0MAhrmVTq150mlaE-F7n14EjMZO0SgMsn7GnE1jJtc_9zb7HRi7i76QHxB7tZLD79LkqiXZ4oWBhbjz1eFXhKG4vPoj5QadXIVAGoHAHEvQ=w1280"},
+  {file:"embroidery02.jpg", label:"Piece 2",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB2sMs9yktGu3PPHaaQixYOxlx_R4mwnGXD9p9rfHSfkavmOrVltj-8y931-MR0rxtX3ROYyEoQLemm7iorhERFlNKFA3UW1KSiBVDdJFo5oht1eukJalM28-LttsIoudt-TXCC_MTfE9deUa3Xk69e3zc9dEYMj9engQ3Dvfd-uhbypcFu1Jv31dYNDMgHlmQWCsSn5aKGc6tu65JC8_IO1TAKXn7-DhwycemzUp8=w1280"},
+  {file:"embroidery03.jpg", label:"Piece 3",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAcNyr62wisIgcYA3Tbf5L94nyVoxYP2HDLLWHkbnerMZpF5Gi_JXkaZ8ef_rL2F8rdcLs57evENz0q4bC1IUV03oG4dkQiaGlkPyycJK5hNaoE8ftBwc19ueXmY4B5AdtTkK3k16N_qAOiPgBeDCih1hQ5vrgWsg1nC2BfI1q2a-ZShotHWitRbB1Qa3hGUWCHoTy6uBDaU-ddWYpV_v16zj3G7uAadrxj6J9FTe4=w1280"},
+  {file:"embroidery04.jpg", label:"Piece 4",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB6aItwpL0lIG6x4OSl_DAfiuzqscLKZs9HNRq5aah-xqSsy1E_ZOTEyujVREHTcPwtlZqUVBmYeN9mF7Cx9NU-LAMPfrO5u4rmRBtX_72wPOA-PBnJW_4wNrbxmiBp-w2QkrtPmXLTMfvHcyKTbTuafAPmtvlosK_A57eUQSUBW_EBmQMe7WFFNgMXTQt6pLQ8RGzLuFyLbtL_Z5rwqR7C4LetLWtJFjT3dT4gs=w1280"},
+  {file:"embroidery05.jpg", label:"Piece 5",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDLG72nmIDTeygSBINyuBC2KYaSvXosNWf0WKnCcertzpy_8UuZgFYfeDEHUhfm8vQaCoFHIcBYXF1g_pGu8vil2g1UqTHAd0rH-hLchaxXQSkZfEqdNuq-gQmoSxFulFVrXyhEAeFKsn7CkjBjxLqtS2XlhNDa0nBjxB8NZXHRX1C794oXPuv31SEOITo7ayRybZ-OFaK3HJYLRloHexcnrxP8vxNXsNMxRPNTaW4=w1280"},
+  {file:"embroidery06.jpg", label:"Piece 6",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUChNc5aRwqIgTjIONTbjJUlsSKy7lkv0dI2QjZ_9NUQXfH9QDqmidvRNy8fzSTuDHiVh03HFwt8yDmTvfCAaiA5xDlepEIY1mbuBAfb4H9ALbPIjuBoxkqYOQwi2SbG0YQyz9g23cRbtrmzMNkH32OYFTKmEM3SzYRdPA1L0VWfstBuVU8YioKCZhiGrtnEwjBxRB_xV_EhHapXu6xb48zfvEumx7C1MZSuy5hH=w1280"},
+  {file:"embroidery07.jpg", label:"Piece 7",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAjeMmJYNDZmMqwMlqcqKIRvS5R6VQ3eFj3UdqPFjxv-eKwO_pDKfFQcTVrOzHD5INd2-wE0JCxqNNl_ZZ9rdPlrwWneAA46DjJ06xB2wS4IJDNiBRTqEA2ET5xk1jeBZdLeJtGMb56TC3d9S7xISp3qoh8q7oEyxwMvcRWf-eNyVprR35kQhR89iNv7Uu2TADnJHnEzxXCTmyagmFsPYR2vbAEgGBwZPmHbg=w1280"},
+  {file:"embroidery08.jpg", label:"Piece 8",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCgo68orA8g89GdeSga0MGs73oLunlVws-v-MGTLu4VKriVl9yurYDdAUAJtXP8_ebNeimT_UZ77GycvP2MQ5HxPO3AmpPdiUE1WF-rFvfHTD82XIIcAteKF1XhAvzMcXdW5m5RkeD8lwQjdUaasE930GfKZ0vMQmtp80arMgjdkxDV15V_5VSA6a7kYUEIQDdFH7ZSV7_dyIke2w-6HOw02LQqMysJkKq7H47OTFk=w1280"},
+  {file:"embroidery09.jpg", label:"Piece 9",  wip:false, fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB6D8emQXplygcyY29QjagV-4zywQJupfRFjiWTm_GCxK37sd7RO99xsDl8HtsqqF2gcPnCAWLu-aheraHAv4tgdamIJTZ5WWivJIX8nH5FputFCAHizgM29zw7tj9WI-qfe4zUUK5Vr8jKtUxN2gQAn_Y0eJ3YnHm_yBUwrAu-u6T-jxbuZpaqSy7heAWxRye7gmUrGg-zQLnOO1B_s9rtQ3GmwgxvAVkSfoKdgkk=w1280"},
+  {file:"embroidery10.jpg", label:"Piece 10", wip:true,  fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCRucuYjJOl80mIi6hQodSxQABhV-IfgSnG0cmL90WrFIGcuaXmakAa4n96_eHTRIyLzRAE6QWgdCFhwKrJwdErl-3fzfxhQVJjn_cozWtyeHqhSDM-aDJIH6fQLX5G1gY2DzOuyluzx31JD40SgKENshiydy9abcdrvRMIdEva8uGKbWPk08XEIDcX4VHs5mcOQest_scWZLKMiOwGrtAg8JAHR1wmUkbYr20e=w1280"},
 ];
+
 let ci=0;
-function buildGallery(){const g=document.getElementById('gallery');g.innerHTML='';artworks.forEach((a,i)=>{const c=document.createElement('div');c.className='art-card';const img=new Image();img.alt='Embroidery piece '+(i+1);img.loading='lazy';img.onerror=()=>{img.src=a.fb;};img.src=a.src;c.appendChild(img);const ov=document.createElement('div');ov.className='art-card-overlay';ov.innerHTML=(a.wip?'<span class="in-progress">In progress</span><br>':'')+'<p class="art-card-label">Piece '+(i+1)+'</p>';c.appendChild(ov);c.addEventListener('click',()=>openLB(i));g.appendChild(c);});}
-function openLB(i){ci=i;const img=document.getElementById('lb-img');img.onerror=()=>{img.src=artworks[i].fb;};img.src=artworks[i].src;document.getElementById('lb-label').textContent=(artworks[i].wip?'In progress · ':'')+'Piece '+(i+1)+' / '+artworks.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function buildGallery(){
+  const g=document.getElementById('gallery');
+  g.innerHTML='';
+  artworks.forEach((a,i)=>{
+    const card=document.createElement('div');
+    card.className='art-card';
+    const img=document.createElement('img');
+    img.alt=a.label;
+    img.loading='lazy';
+    // Try local file first, fall back to Google CDN
+    img.src='images/'+a.file;
+    img.onerror=function(){this.onerror=null;this.src=a.fb;};
+    card.appendChild(img);
+    const ov=document.createElement('div');
+    ov.className='art-card-overlay';
+    ov.innerHTML=(a.wip?'<span class="wip-badge">In progress</span><br>':'')+'<p class="art-card-label">'+a.label+'</p>';
+    card.appendChild(ov);
+    card.addEventListener('click',()=>openLB(i));
+    g.appendChild(card);
+  });
+}
+function openLB(i){
+  ci=i;
+  const lbImg=document.getElementById('lb-img');
+  lbImg.src='images/'+artworks[i].file;
+  lbImg.onerror=function(){this.onerror=null;this.src=artworks[i].fb;};
+  document.getElementById('lb-label').textContent=(artworks[i].wip?'In progress · ':'')+artworks[i].label+' of '+artworks.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 function closeLightboxOnBackdrop(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
 function lightboxNav(d){ci=(ci+d+artworks.length)%artworks.length;openLB(ci);}
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
-document.addEventListener('keydown',e=>{if(document.getElementById('lightbox').classList.contains('open')){if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='ArrowRight')lightboxNav(1);}});
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='Escape')closeLightbox();
+    if(e.key==='ArrowLeft')lightboxNav(-1);
+    if(e.key==='ArrowRight')lightboxNav(1);
+  }
+});
 buildGallery();
 </script>
 </body>
