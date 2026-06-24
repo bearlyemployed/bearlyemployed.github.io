@@ -196,8 +196,8 @@ function buildGallery(){
     img.alt=a.label;
     img.loading='lazy';
     // Try local file first, fall back to Google CDN
-    img.src='images/'+a.file;
     img.onerror=function(){this.onerror=null;this.src=a.fb;};
+    img.src='images/'+a.file;
     card.appendChild(img);
     const ov=document.createElement('div');
     ov.className='art-card-overlay';
@@ -210,8 +210,8 @@ function buildGallery(){
 function openLB(i){
   ci=i;
   const lbImg=document.getElementById('lb-img');
-  lbImg.src='images/'+artworks[i].file;
   lbImg.onerror=function(){this.onerror=null;this.src=artworks[i].fb;};
+  lbImg.src='images/'+artworks[i].file;
   document.getElementById('lb-label').textContent=(artworks[i].wip?'In progress · ':'')+artworks[i].label+' of '+artworks.length;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow='hidden';
