@@ -146,6 +146,21 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
 .hero-corner-left{left:0;}
 .hero-corner-right{right:0;}
 .hero-corner img{width:100%;height:auto;display:block;}
+
+.hero-banner{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:6;
+  pointer-events:none;
+  line-height:0;
+}
+.hero-banner img{
+  width:100%;
+  display:block;
+  object-fit:cover;
+}
 </style>
 </head>
 <body>
@@ -201,6 +216,7 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
   </div>
   <div class="hero-corner hero-corner-left"><img src="leftcorner.png" alt=""></div>
   <div class="hero-corner hero-corner-right"><img src="rightcorner.png" alt=""></div>
+  <div class="hero-banner"><img src="indexbanner.png" alt=""></div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
@@ -354,6 +370,8 @@ window.addEventListener('scroll', () => {
   // Corners drift up slightly slower than content - foreground parallax feel
   if(cornerLeft) cornerLeft.style.transform = 'translateY(' + (y * 0.15) + 'px)';
   if(cornerRight) cornerRight.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+  const banner = document.querySelector('.hero-banner');
+  if(banner) banner.style.transform = 'translateY(' + (y * 0.05) + 'px)';
 }, {passive: true});
 
 // ── SCROLL REVEAL
