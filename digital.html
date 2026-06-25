@@ -78,6 +78,10 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
 .footer-links a{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:var(--teal);}
 .footer-copy{font-size:0.7rem;color:rgba(107,94,86,0.45);}
+
+.gallery-filters{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem;}
+.filter-btn{background:transparent;border:1px solid rgba(44,36,32,0.2);border-radius:100px;padding:0.4rem 1.2rem;font-size:0.75rem;font-family:'DM Sans',sans-serif;letter-spacing:0.08em;color:var(--ink-light);transition:all 0.2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--teal);border-color:var(--teal);color:white;}
 </style>
 </head>
 <body>
@@ -135,6 +139,11 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
 
 <section class="gallery-section">
+  <div class="gallery-filters reveal">
+    <button class="filter-btn active" onclick="filterGallery('all',this)">All Works</button>
+    <button class="filter-btn" onclick="filterGallery('2020',this)">2020</button>
+    <button class="filter-btn" onclick="filterGallery('2024',this)">2024</button>
+  </div>
   <div class="masonry" id="gallery"></div>
 </section>
 
@@ -180,11 +189,13 @@ const artworks=[
   {src:"images/digital14.png",name:"Duck Dynasty",year:"2024"},
 ];
 let ci=0;
-function buildGallery(){const g=document.getElementById('gallery');g.innerHTML='';artworks.forEach((a,i)=>{const c=document.createElement('div');c.className='art-card';const img=new Image();img.alt='Digital work '+(i+1);img.loading='lazy';img.src=a.src;c.appendChild(img);const ov=document.createElement('div');ov.className='art-card-overlay';ov.innerHTML='<p class="art-card-title">'+a.name+'</p><p class="art-card-year">'+a.year+'</p>';c.appendChild(ov);c.addEventListener('click',()=>openLB(i));g.appendChild(c);});}
-function openLB(i){ci=i;const img=document.getElementById('lb-img');img.src=artworks[i].src;document.getElementById('lb-label').textContent=artworks[i].name+' · '+artworks[i].year;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+let filteredArtworks=[...artworks];
+function filterGallery(year,btn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');filteredArtworks=year==='all'?[...artworks]:artworks.filter(a=>a.year===year);buildGallery(filteredArtworks);}
+function buildGallery(items=artworks){filteredArtworks=items;const g=document.getElementById('gallery');g.innerHTML='';items.forEach((a,i)=>{const c=document.createElement('div');c.className='art-card';const img=new Image();img.alt='Digital work '+(i+1);img.loading='lazy';img.src=a.src;c.appendChild(img);const ov=document.createElement('div');ov.className='art-card-overlay';ov.innerHTML='<p class="art-card-title">'+a.name+'</p><p class="art-card-year">'+a.year+'</p>';c.appendChild(ov);c.addEventListener('click',()=>openLB(i,filteredArtworks));g.appendChild(c);});}
+function openLB(i,items=artworks){ci=i;const img=document.getElementById('lb-img');img.src=artworks[i].src;document.getElementById('lb-label').textContent=items[i].name+' · '+items[i].year;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 function closeLightboxOnBackdrop(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
-function lightboxNav(d){ci=(ci+d+artworks.length)%artworks.length;openLB(ci);}
+function lightboxNav(d){ci=(ci+d+filteredArtworks.length)%filteredArtworks.length;openLB(ci,filteredArtworks);}
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
 document.addEventListener('keydown',e=>{if(document.getElementById('lightbox').classList.contains('open')){if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='ArrowRight')lightboxNav(1);}});
 buildGallery();
