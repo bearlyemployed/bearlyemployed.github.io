@@ -140,6 +140,17 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
 .footer-copy{font-size:0.7rem;color:rgba(107,94,86,0.45);letter-spacing:0.05em;}
 @media(max-width:600px){footer{flex-direction:column;text-align:center;align-items:center;}}
 @media(max-width:700px){.slide-previews{display:none;}.slide-content{width:90%;max-width:none;}.carousel-slide{min-height:400px;}}
+
+/* Corner foreground images */
+.hero-corner{position:absolute;bottom:0;z-index:5;pointer-events:none;}
+.hero-corner-left{left:0;}
+.hero-corner-right{right:0;}
+.hero-corner img{
+  width:clamp(160px, 22vw, 320px);
+  height:auto;
+  display:block;
+  /* Scrolls with page since position:absolute inside hero */
+}
 </style>
 </head>
 <body>
@@ -192,6 +203,12 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <p class="hero-tagline reveal d2">Watercolor artist, digital illustrator, embroidery obsessive - and maker of the occasional pun-titled animal portrait.</p>
     <div class="hero-rule reveal d3"><div class="hero-rule-dot"></div></div>
     <p class="hero-scroll reveal d4">Scroll to explore ↓</p>
+  </div>
+  <div class="hero-corner hero-corner-left">
+    <img src="leftcorner.png" alt="">
+  </div>
+  <div class="hero-corner hero-corner-right">
+    <img src="rightcorner.png" alt="">
   </div>
 </section>
 
@@ -289,6 +306,12 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <button class="carousel-arrow carousel-next" onclick="move(1)" aria-label="Next">&#8250;</button>
   </div>
   <div class="carousel-dots" id="dots"></div>
+  <div class="hero-corner hero-corner-left">
+    <img src="leftcorner.png" alt="">
+  </div>
+  <div class="hero-corner hero-corner-right">
+    <img src="rightcorner.png" alt="">
+  </div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
@@ -297,6 +320,12 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
   <h2 class="reveal">Art made with <em>curiosity</em></h2>
   <p class="reveal d1">I'm Sasha De Silva - an artist drawn to the animal world in all its forms. Whether I'm layering watercolor washes, drawing on a screen, pulling thread through fabric, or building iOS games, the goal is always the same: to find something true in the subject and bring it out.</p>
   <a href="about.html" class="about-btn reveal d2">Read more about me →</a>
+  <div class="hero-corner hero-corner-left">
+    <img src="leftcorner.png" alt="">
+  </div>
+  <div class="hero-corner hero-corner-right">
+    <img src="rightcorner.png" alt="">
+  </div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
@@ -306,6 +335,12 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
   <p class="reveal d1">Commissions, collaborations, or just want to talk about otters? I'd love to hear from you.</p>
   <div class="contact-divider reveal d2"></div>
   <a href="mailto:bearlyemployed@gmail.com" class="contact-email reveal d3">bearlyemployed@gmail.com</a>
+  <div class="hero-corner hero-corner-left">
+    <img src="leftcorner.png" alt="">
+  </div>
+  <div class="hero-corner hero-corner-right">
+    <img src="rightcorner.png" alt="">
+  </div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
@@ -338,8 +373,14 @@ document.querySelectorAll('a, button').forEach(el => {
 
 // ── PARALLAX - faster, more obvious
 const heroBg = document.getElementById('heroBg');
+const cornerLeft = document.querySelector('.hero-corner-left');
+const cornerRight = document.querySelector('.hero-corner-right');
 window.addEventListener('scroll', () => {
-  heroBg.style.transform = 'translateY(' + (window.scrollY * 0.7) + 'px)';
+  const y = window.scrollY;
+  heroBg.style.transform = 'translateY(' + (y * 0.7) + 'px)';
+  // Corners drift up slightly slower than content - foreground parallax feel
+  if(cornerLeft) cornerLeft.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+  if(cornerRight) cornerRight.style.transform = 'translateY(' + (y * 0.15) + 'px)';
 }, {passive: true});
 
 // ── SCROLL REVEAL
