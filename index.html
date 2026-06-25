@@ -141,11 +141,6 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
 @media(max-width:600px){footer{flex-direction:column;text-align:center;align-items:center;}}
 @media(max-width:700px){.slide-previews{display:none;}.slide-content{width:90%;max-width:none;}.carousel-slide{min-height:400px;}}
 
-/* Corner foreground images */
-.hero-corner{position:absolute;bottom:0;z-index:5;pointer-events:none;width:clamp(120px,18vw,260px);}
-.hero-corner-left{left:0;}
-.hero-corner-right{right:0;}
-.hero-corner img{width:100%;height:auto;display:block;}
 
 .hero-banner{
   position:absolute;
@@ -157,6 +152,19 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
   line-height:0;
 }
 .hero-banner img{
+  width:100%;
+  display:block;
+  object-fit:cover;
+}
+
+.hero-banner-back{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  z-index:4;
+  pointer-events:none;
+  line-height:0;
+}
+.hero-banner-back img{
   width:100%;
   display:block;
   object-fit:cover;
@@ -214,8 +222,7 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <div class="hero-rule reveal d3"><div class="hero-rule-dot"></div></div>
     <p class="hero-scroll reveal d4">Scroll to explore ↓</p>
   </div>
-  <div class="hero-corner hero-corner-left"><img src="leftcorner.png" alt=""></div>
-  <div class="hero-corner hero-corner-right"><img src="rightcorner.png" alt=""></div>
+  <div class="hero-banner-back"><img src="indexbannerback.png" alt=""></div>
   <div class="hero-banner"><img src="indexbanner.png" alt=""></div>
 </section>
 
@@ -368,10 +375,10 @@ window.addEventListener('scroll', () => {
   const y = window.scrollY;
   heroBg.style.transform = 'translateY(' + (y * 0.7) + 'px)';
   // Corners drift up slightly slower than content - foreground parallax feel
-  if(cornerLeft) cornerLeft.style.transform = 'translateY(' + (y * 0.15) + 'px)';
-  if(cornerRight) cornerRight.style.transform = 'translateY(' + (y * 0.15) + 'px)';
   const banner = document.querySelector('.hero-banner');
   if(banner) banner.style.transform = 'translateY(' + (y * 0.05) + 'px)';
+  const bannerBack = document.querySelector('.hero-banner-back');
+  if(bannerBack) bannerBack.style.transform = 'translateY(' + (y * 0.1) + 'px)';
 }, {passive: true});
 
 // ── SCROLL REVEAL
