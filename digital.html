@@ -180,7 +180,7 @@ const artworks=[
   {src:"images/digital14.png",name:"Duck Dynasty",year:"2024"},
 ];
 let ci=0;
-function buildGallery(){const g=document.getElementById('gallery');g.innerHTML='';artworks.forEach((a,i)=>{const c=document.createElement('div');c.className='art-card';const img=new Image();img.alt='Digital work '+(i+1);img.loading='lazy';img.src=a.src;c.appendChild(img);const ov=document.createElement('div');ov.className='art-card-overlay';ov.innerHTML='<p class="art-card-num">'+(i+1)+' / '+artworks.length+'</p>';c.appendChild(ov);c.addEventListener('click',()=>openLB(i));g.appendChild(c);});}
+function buildGallery(){const g=document.getElementById('gallery');g.innerHTML='';artworks.forEach((a,i)=>{const c=document.createElement('div');c.className='art-card';const img=new Image();img.alt='Digital work '+(i+1);img.loading='lazy';img.src=a.src;c.appendChild(img);const ov=document.createElement('div');ov.className='art-card-overlay';ov.innerHTML='<p class="art-card-title">'+a.name+'</p><p class="art-card-year">'+a.year+'</p>';c.appendChild(ov);c.addEventListener('click',()=>openLB(i));g.appendChild(c);});}
 function openLB(i){ci=i;const img=document.getElementById('lb-img');img.src=artworks[i].src;document.getElementById('lb-label').textContent=artworks[i].name+' · '+artworks[i].year;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 function closeLightboxOnBackdrop(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
