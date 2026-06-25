@@ -53,7 +53,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,247,242,0.93);backdrop
 .d1{transition-delay:.1s;}.d2{transition-delay:.22s;}.d3{transition-delay:.36s;}.d4{transition-delay:.5s;}
 
 /* ── HERO */
-.hero{position:relative;overflow:hidden;min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 5rem;}
+.hero{position:relative;overflow:hidden;min-height:75vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem 0;}
 .hero-bg{
   position:absolute;inset:-120px;z-index:0;
   background:
@@ -142,15 +142,10 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
 @media(max-width:700px){.slide-previews{display:none;}.slide-content{width:90%;max-width:none;}.carousel-slide{min-height:400px;}}
 
 /* Corner foreground images */
-.hero-corner{position:absolute;bottom:0;z-index:5;pointer-events:none;}
+.hero-corner{position:absolute;bottom:0;z-index:5;pointer-events:none;width:clamp(120px,18vw,260px);}
 .hero-corner-left{left:0;}
 .hero-corner-right{right:0;}
-.hero-corner img{
-  width:clamp(160px, 22vw, 320px);
-  height:auto;
-  display:block;
-  /* Scrolls with page since position:absolute inside hero */
-}
+.hero-corner img{width:100%;height:auto;display:block;}
 </style>
 </head>
 <body>
@@ -204,12 +199,8 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <div class="hero-rule reveal d3"><div class="hero-rule-dot"></div></div>
     <p class="hero-scroll reveal d4">Scroll to explore ↓</p>
   </div>
-  <div class="hero-corner hero-corner-left">
-    <img src="leftcorner.png" alt="">
-  </div>
-  <div class="hero-corner hero-corner-right">
-    <img src="rightcorner.png" alt="">
-  </div>
+  <div class="hero-corner hero-corner-left"><img src="leftcorner.png" alt=""></div>
+  <div class="hero-corner hero-corner-right"><img src="rightcorner.png" alt=""></div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
@@ -306,12 +297,6 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <button class="carousel-arrow carousel-next" onclick="move(1)" aria-label="Next">&#8250;</button>
   </div>
   <div class="carousel-dots" id="dots"></div>
-  <div class="hero-corner hero-corner-left">
-    <img src="leftcorner.png" alt="">
-  </div>
-  <div class="hero-corner hero-corner-right">
-    <img src="rightcorner.png" alt="">
-  </div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
@@ -320,12 +305,6 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
   <h2 class="reveal">Art made with <em>curiosity</em></h2>
   <p class="reveal d1">I'm Sasha De Silva - an artist drawn to the animal world in all its forms. Whether I'm layering watercolor washes, drawing on a screen, pulling thread through fabric, or building iOS games, the goal is always the same: to find something true in the subject and bring it out.</p>
   <a href="about.html" class="about-btn reveal d2">Read more about me →</a>
-  <div class="hero-corner hero-corner-left">
-    <img src="leftcorner.png" alt="">
-  </div>
-  <div class="hero-corner hero-corner-right">
-    <img src="rightcorner.png" alt="">
-  </div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
@@ -335,12 +314,6 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
   <p class="reveal d1">Commissions, collaborations, or just want to talk about otters? I'd love to hear from you.</p>
   <div class="contact-divider reveal d2"></div>
   <a href="mailto:bearlyemployed@gmail.com" class="contact-email reveal d3">bearlyemployed@gmail.com</a>
-  <div class="hero-corner hero-corner-left">
-    <img src="leftcorner.png" alt="">
-  </div>
-  <div class="hero-corner hero-corner-right">
-    <img src="rightcorner.png" alt="">
-  </div>
 </section>
 
 <div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
