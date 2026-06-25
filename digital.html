@@ -162,24 +162,24 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 document.querySelectorAll('.hero .reveal').forEach(el=>setTimeout(()=>el.classList.add('visible'),80));
 // Images: update src to images/digital1.png etc once uploaded to GitHub
 const artworks=[
-  {src:"images/digital01.png",year:"2020"},
-  {src:"images/digital02.png",year:"2020"},
-  {src:"images/digital03.png",year:"2024"},
-  {src:"images/digital04.png",year:"2024"},
-  {src:"images/digital05.png",year:"2024"},
-  {src:"images/digital06.png",year:"2024"},
-  {src:"images/digital07.png",year:"2024"},
-  {src:"images/digital08.png",year:"2024"},
-  {src:"images/digital09.png",year:"2024"},
-  {src:"images/digital10.png",year:"2024"},
-  {src:"images/digital11.png",year:"2024"},
-  {src:"images/digital12.png",year:"2024"},
-  {src:"images/digital13.png",year:"2024"},
-  {src:"images/digital14.png",year:"2024"},
+  {src:"images/digital01.png",name:"Trinity",year:"2020"},
+  {src:"images/digital02.png",name:"Panda Lurking",year:"2020"},
+  {src:"images/digital03.png",name:"Alien",year:"2024"},
+  {src:"images/digital04.png",name:"Buddy Cops",year:"2024"},
+  {src:"images/digital05.png",name:"Rhaenyra",year:"2024"},
+  {src:"images/digital06.png",name:"Beetlejuice",year:"2024"},
+  {src:"images/digital07.png",name:"Joker",year:"2024"},
+  {src:"images/digital08.png",name:"Deadpool",year:"2024"},
+  {src:"images/digital09.png",name:"Plan 9 From Outer Space",year:"2024"},
+  {src:"images/digital10.png",name:"The Switcheroo",year:"2024"},
+  {src:"images/digital11.png",name:"Drawing Hive Dogs",year:"2024"},
+  {src:"images/digital12.png",name:"Stephanie",year:"2024"},
+  {src:"images/digital13.png",name:"Bella",year:"2024"},
+  {src:"images/digital14.png",name:"Duck Dynasty",year:"2024"},
 ];
 let ci=0;
 function buildGallery(){const g=document.getElementById('gallery');g.innerHTML='';artworks.forEach((a,i)=>{const c=document.createElement('div');c.className='art-card';const img=new Image();img.alt='Digital work '+(i+1);img.loading='lazy';img.src=a.src;c.appendChild(img);const ov=document.createElement('div');ov.className='art-card-overlay';ov.innerHTML='<p class="art-card-num">'+(i+1)+' / '+artworks.length+'</p>';c.appendChild(ov);c.addEventListener('click',()=>openLB(i));g.appendChild(c);});}
-function openLB(i){ci=i;const img=document.getElementById('lb-img');img.src=artworks[i].src;document.getElementById('lb-label').textContent='Digital work '+(i+1)+' · '+artworks[i].year+' / '+artworks.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function openLB(i){ci=i;const img=document.getElementById('lb-img');img.src=artworks[i].src;document.getElementById('lb-label').textContent=artworks[i].name+' · '+artworks[i].year;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 function closeLightboxOnBackdrop(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
 function lightboxNav(d){ci=(ci+d+artworks.length)%artworks.length;openLB(ci);}
