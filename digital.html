@@ -132,7 +132,7 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
     <h1 class="reveal d1">Digital<br><em>Drawings</em></h1>
     <p class="hero-subtitle reveal d2">Characters, creatures, and worlds - a few digital pieces worked on screen.</p>
     <div class="hero-rule reveal d3"><div class="hero-rule-dot"></div></div>
-    <p class="hero-count reveal d3">14 works</p>
+    <p class="hero-count reveal d3">15 works</p>
   </div>
 </section>
 
@@ -141,6 +141,7 @@ footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;
 <section class="gallery-section">
   <div class="gallery-filters reveal">
     <button class="filter-btn active" onclick="filterGallery('all',this)">All Works</button>
+    <button class="filter-btn" onclick="filterGallery('2019',this)">2019</button>
     <button class="filter-btn" onclick="filterGallery('2020',this)">2020</button>
     <button class="filter-btn" onclick="filterGallery('2024',this)">2024</button>
   </div>
@@ -187,6 +188,7 @@ const artworks=[
   {src:"images/digital12.png",name:"Stephanie",year:"2024"},
   {src:"images/digital13.png",name:"Bella",year:"2024"},
   {src:"images/digital14.png",name:"Duck Dynasty",year:"2024"},
+  {src:"images/digital15.png",name:"Perched Bird",year:"2019"},
 ];
 let ci=0;
 let filteredArtworks=[...artworks];
