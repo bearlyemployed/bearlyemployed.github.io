@@ -177,43 +177,43 @@ document.querySelectorAll('.hero .reveal').forEach(el=>setTimeout(()=>el.classLi
 // fb  = Google CDN fallback if local file missing
 // title + year shown in overlay and lightbox
 const artworks=[
-  {src:"images/Otter.jpg",                    title:"Hello from the Otter Side",           year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDqLtir8OrpNOw_rY5uFcDk3FzonvmSAJ2rdcwxlfwun5Dv6YldrIB-ZUh9_rE48llGiRYoX2Rvmhax3vbPDtaxoFhMcqgpfguXo0wHoKGLG7zXyv4S-uIQ715V48r26WTf97cIO_NKcz-iSURiSMwnM9DbrvUSOsqhNDNQSpecDGiKXzZNEz1DKe1JV1HwFXsNC0GnkWRyZ48G0FU0C6fc6oaqqQ96dzzjMq93y8A=w1280"},
-  {src:"images/House of the Dogon.JPG",       title:"House of the Dogon",                  year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCKB4Pt5_g_OkUU6QZD85T4EGgzYngHvetBVNBKywZNcMnp-akaiDzKAQyKmFT7JB080Ew3d7Dvigluy2Gq2CidEQdIL_dJ9Sy5QmkeuWNRPNwgnDZv6gw2MulKziwwBRNOPBzrXl1rikfFfrQNkFy6ZV3CKpt6ViQZunN84KNZesuZaex2Xot1oMPPu9BNXpuRLfLR1rjcFnL9AHaCLDqs4uwWVYBkegp9PVH7WLw=w1280"},
-  {src:"images/Coral Cuttle Buddies.jpg",     title:"Coral Cuttle Buddies",                year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDJ1PsLD8qYL6s71Q3XwoujNgLi3BL1PDHTHgLn5aj3Dp6KvenSI2PQXv7R6YVQWPsFKGva7zwXzCjU6qAFhjJ8CcWBX1aTdVE0Z-H7FE6AttJMtwF8p0BkzU4HX8EvDrEPTOiyVnk0hhio0H1T85Ut9s76tVjZBLRpb_xBBNtOyjY2uZDlJT57vJ7tp9L5I_9sb7YYKdU_MYvDwLPuZ8gGy3LCBQMVU-zq3iN1n-o=w1280"},
-  {src:"images/Piggy.jpg",                    title:"This Little Piggy Went to Market",    year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDpYfvvhbxWrFvivDdRI65_qSmCt3r-BxI25NygMbD0hI0ZV4hFXLwGmhV-KiMVXYVMEAcfA8Lvi_x4z0gfihitkeGAGQnBzn4OUVl-gzw7jlxiJXKKMOQtgN5pOLyPDIEpMTK9ov0ARZaaebOpCY7OOONdE9kz0nJQEn-uc4a8A2s22T5UI2GoucqY52WuwJkrvSiOCnwMB2Xd_8xuREwVEjnIMnXgP2EkPgUw1aY=w1280"},
-  {src:"images/Black Fin Shark.jpg",          title:"Lone Shark",                          year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUBj5HEpXuA87w-THRAAEYvZpSHayfzfpedUP2KAPpdsDpwNb3hgi-z7chgskYcyy3HzVH5ZBU2aWxElkEu_RhNAkq6YfvJZDbvuiHbxtK2HrTmtwVjgkZ8InV0keu4_Ceiql4pzTWVm7N25QTa4FDOcXmNKj1uvIOZ3ADkjdk8eOlI4sqnef5BmmkOT1i2rruxuZHsd513_6dyuPRmZX=w1280"},
-  {src:"images/Sunset Ladybugs.jpg",          title:"Sunset Ladybugs",                     year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUD4F7q06kR_jMZvbThvYilbgfqs7hFs15Swy0iudcvvZWhXzgNmJNmefVc5f9DntHbNbkMmNNPuPKs-EujzH6IWX8AoHGQf0w_3_tGGFLo9yUzcws4iV29DhOQi83A4Rag95Hf9zhJqWXj0HdvByZLpfqWtEgaEA8lzqZJwVGb8esDx1BLPET2_QFaYlMfg57AldyPf3RP0L2837om-UeqV7UCefgOwxQH1f_qt=w1280"},
-  {src:"images/Polarizing.jpg",               title:"Polarizing",                          year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUBm9UICyAdSHwngEJ9Bb_RBLvVRbPDfMdrMSHDHJK9kSs5b6g4HTvYbfCMY2gJPiTEhoZ6SZloWBnh3uV8X2MQ-8XYuxxEwZ-B4z_LLB7FhyvRR1_o6Xl91KRcZKAZk-3Y5b5mZSuuHi7-Bu_Jb4HfZUKOCNcU_W5jXi_kG3yvOTln2yS5ZSWJXolGpPPszQWlArgbWBzJkahFUYyjQyTczSEwkOXgskyWaTHIFWnc=w1280"},
-  {src:"images/Whale.jpg",                    title:"Hump Day",                            year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUARrvoyCsrcBaVpka5zISQj8WHOxT9Xb0FvGpaOlwJzqGbwk3zyJPTrMr9Yr7h6s-S5_UAUNKlrjh-wgC-WXU935t0L_SPzTeq6x5wdIOaf4lVMH8XXLflrMXzOEck0ta2jQK6EKd959nsoEaH7zrcE0BiFTdtNuXu38D9yN9Duy5i-IqvEo6yASki0EMGbOudjwLHqonpbVJ047WyzYBEf=w1280"},
-  {src:"images/Humpback Whale.jpg",           title:"Humpback Bubble Bath",                year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUC0bu16KnMDl69o7IbZqx8nQ0UAMVcdheJEYU27V0NXu7f5CAQn-kJmXCqmgwPeG_oovGXaTfQPdnxErnIMCgp_ZZRrKphms1ICUzInPhdxgktSdZ1JeS1G9UvEfDlGf-HbcO4Y5Cp2SM0H6JVBGHB171u86cuv2FaBEgwjXeLXvC4UddQUtMvYrXcQb_OEA-Zyt-TXnOewTbhoKoM2kiVFMe-rvjyD84C46odi0oc=w1280"},
-  {src:"images/Party Without A Porpoise.jpg", title:"Party without a Porpoise",            year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB1KpeuBdOFFQEv3PqHP6AoXxeIMj-LpBLv4PH5R31SMwQ6RqMFlupyppW4vbCIrjk4SRRMqngkCwvR__FevCnNPLsBwhI1-HHSrlhVrc1TrQiXiu9177NvN4x_seSG4bkmXenhMidtCGa0Oe4UQW1AGCk2hhDc9mbRpEyL64YuaXz-ojhIPcH2_HV5l_RHxsOZdezcLl-5XPk3Va2I5v7aRaqKIX75JTgXP0c=w1280"},
-  {src:"images/Piff.jpg",                     title:"Piff's Playground",                   year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAeu7obFXM0ztR1GNr4Ndrp-4FOiwqHUwjg157nDL0NG0x0mxx5hfvnsx1uMEDiu52R-EwF15G5Mm-F_Z_CXM6wcgS0WqVqNTt-JGASECTL7oYQyVIM3Gwtm0CnBx9bj2rZ1VPPf1l_hVQhzUkCNINh21PTH41pbrIMPlNxTfPbDHXrVt9W88fquc-cV2AsGxehBVtyb2q7TXfRSYD6eRPHnkdmFTwfAGh3SNHg=w1280"},
-  {src:"images/Giraffe.jpg",                  title:"Giraffe Manor",                       year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUA4Y-0a9hDFgRhH4KQsQwwYCZWVT81lTbGdQ2ZB3GO4knFB822P6eGQYFMx681WzZUWx5KdnqUUomxmocl1zmGwB9picKXX7yPrYxkZrjBSvA4SPcWe_Ix4AyH351Y273kqJ1LcLOKPcCTonzjDLWpbD3yS_5qDrHD9zZvAhXgsf4phP1mTqGm_GF6LIzMEUn12AeE5dgHl5C4Nek5fuy8rvm5azBJHbfRh2CHcZ38=w1280"},
-  {src:"images/Golden Retriever.jpg",         title:"Dahlia's Pet",                        year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDUs9-7TMmDnKJWbaJL_s-yqELvo3bcFd8g2rYqma6fuW2C_PHX17UjTVgDDze2mM8mGBwyAfwKO6O42VbWK6lVe8GW5Dgx_JJgnK87zMcXsm5J-UPMgRIqZGmC8rjwtTyX_m71veS8pOn5AQ9PKgE-hRO_jKCj1ggosmX6BrT7AX9jBddYpKhP3sOrMKh4cae98DJ0_zssagEEPghWNbEOV0ZxzM6HKjdwnwRn=w1280"},
-  {src:"images/Horse and Corgi.jpg",          title:"Ruff Rider",                          year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDHMVfrw5Oe06q1nNXCq-7FIMrYs9uYuZhZtalgiIpW4rhBtu3qnkCXiw4aHUug3stognnXpjeq3CUqArkGJPidyrNXA3zLz6SZCu-hu642za0t8jRAy5kE5Ct37fTGGAkUcdY0drWhaLnizccTlV7AyalXveqLEgI_gcjHtnRpY2nfWyViY6hw3O3sGcMoJnNzBY8za4px6s6A1Od5tOO1q4R1If2aseFfEg=w1280"},
-  {src:"images/Red Panda.jpg",                title:"Crimson Camouflage",                 year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUBvdWZ7ipw31D_sIB6yOjoR2-P2JfzVzIWgZfAauYvE8m1bFSP-OWwpsAQJPW_0tNS4x09MxGvyxZBuVngw6DpaXfkkONyEL4VGYZVlJn_-BoJ9K7qi42-A9RM7rS5FAy-1Rk07fYQ8poy4FOwf50eO0vgyZrN8TxJtzk7lFhuNvNvNlEoM7URcXa7uTN2GF99uAa3fsYYFz942sXp3ukmLA7-_9mgqOJfSUMF9=w1280"},
-  {src:"images/lion.jpg",                     title:"The Mane Attraction",                 year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDUoKyDTKh_Fy0x2O3AhwwEDySlaaB7KkomL2wEW7FV885vzC8r3uinThzu1mVFv-9J1BGg6NNYLIHC2pAwo2n086A24Nzcf_owGnIopJ5YZsQqSpafNeQ2J_ILYkz62mhiOhG8F-oACb7sTJ48BEG6mL736RUIp5AvoySHph4-Fwl0RimhEQnhEwyTmyHzpJdF1Yq0LXoC6FerBeiw90Q4q8-7K4firJQQnL0C=w1280"},
-  {src:"images/Kestrel.jpg",                  title:"Menstrual Kestrel",                   year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUBukuc7O4ocRNRKcW5WAeb__KVurE1DrnPIsWWKd0up6WuIT_ljyROu37b4iNtIR0fg-UYc4RiKyUtGjWKPpA8BY2MT-baBtU2rwAbH3z1Ka74aYQ8gG0znriKKXldYwkQuG5WfCEqvkr6sdnCfbd0Yiwe_wC6hx7ia6sTqSLapRvX9jUidmOvO_xP4--p-AlTuKkKqcLTSjKX_4mvw5TIXks5US5fGPMzzrcvH-x8=w1280"},
-  {src:"images/Elephant Monkey.jpg",          title:"Wild Companions",                     year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAJDe9WM8RTATGSobyelI9ZBaxiEeLAI30k1Q17YeybfNyPO-7RQistg0TMbAxAZ9A3g0PlHJyva8X8Kh6g01697XnYutV9rdQv577WEHaAXoMYHTZZRizyJHUdxNgKLMvuULp15AnAotWkcKwS0Ba2tIbj6ZMx5dEERn7d2riQXfIOnUpp69gXvs_J841o8GAAL0VeTSKPfsV6OW0FrEhy0OwgUIR3cP7G_Yqc=w1280"},
-  {src:"images/garfield_and_pookie.jpg",      title:"Garfield and Pookie",                 year:"circa 2004", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCpP9x2gRZFJHgNnTC_AMW-lWQlWO6khrMczBv3koxyTxA_2EWYYT9pzBNi6QQp3opF4eYnUFijA213T5dti1mDhM-eudYXmzpScwdqyJoQ4jBeyiDmz4na3l6YM8tFcT1y9hwBv7HCQqD1VqpDZtTBN0NAvt866-fQEcVkZEls_KokAs0fKCbgvoKPEUvzF9LaqBo1se67efNwQ_a0L2i2PjBzLVRwtISxcAGLGPA=w1280"},
-  {src:"images/Paco.JPG",                     title:"Paco's Trip to the Aquarium",         year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAo-rK82Zpbt_BF3npH-RyiVW8SDqOw0B8HplJ-f5fzbfrrQvl8qAOdLMlCPug-5NQsofAQ1apuonH1o0JCl39UA7-Q3H0A9iPKm0L68ioggb4xm_laHBYy7TbiXwiA_Uk_nLKtJCTFn0xkSyOlDoVPAoKPBwabLecCID_3DFG9OCxe4bqW7ixBSwyCr9UJrQ6CZt4E_VP0aAGfa-Tqe8WI-YF-TrHTFzEywHcJ=w1280"},
-  {src:"images/Chicken.jpg",                  title:"Chicken Chicken Me Love the Chicken", year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCLKZeN4mnyT10ffhdRTBWYI-vqO9GXhkI5TYWj0GM0We-XIZnJqfrF8kMsKXcjy50Q6whDUqMCZdyL4p5Hi2WIhhsKZ64_AzFZgUaQlix89nNaGKU-H9f7_A6ZKOKUJ9YPznieIN6BtIYeejYz8UOCQem9vEvstNamKlo8bSHJeNwyjMSJA9Uea96lUtvwvquwyyhR2NCn6zeRkpriA8bGzZWxERr1VvnvfBZB=w1280"},
-  {src:"images/Shetland Pony.jpg",           title:"Lavender Dreams",                     year:"2023", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUC0bu16KnMDl69o7IbZqx8nQ0UAMVcdheJEYU27V0NXu7f5CAQn-kJmXCqmgwPeG_oovGXaTfQPdnxErnIMCgp_ZZRrKphms1ICUzInPhdxgktSdZ1JeS1G9UvEfDlGf-HbcO4Y5Cp2SM0H6JVBGHB171u86cuv2FaBEgwjXeLXvC4UddQUtMvYrXcQb_OEA-Zyt-TXnOewTbhoKoM2kiVFMe-rvjyD84C46odi0oc=w1280"},
-  {src:"images/octopus prime.jpg",            title:"Octopus Prime",                       year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAE6Sp_iA783dHN_xompmvawc-mgiwHsDhtNbLRlWmExghegp34SidvzG2OrQNaMIMJCcvW0dzeTmXY0W6D4Gvvn-vnS_mVTTHcc7dXg8P38BsfEuYeajn_FN5ADhPb5NvfUEmyv2mzSV-PhuynXpXano53WhvSkjyntsrcyR22gC4YUVhokg-v1K5SkvtEm6BZVKz3Xk8I8s-tXWTR4c-TEBfWgpXLNeh0LTDs2eg=w1280"},
-  {src:"images/rocky.jpg",                    title:"Rocky",                               year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUA5Wesyf5_L9Nunel3kDavs4Dlvi4-EfZ-amvyDQJXwWcEKLXWwQgIVAOVxyQsucEwf4-LEMVxFNw-j4l35hBI81vmdozJiGOnCTmtwJujtqxUYCDidytSbbPjP8OaCRF52A8JHmTepuTzLlkvxNC6jdXwhe_VGHFDURFqsv7CkmMx7_nDx6AZSnLC6gHRn_VudpR1JGIbSPg7YX01DqZHQ_a-xVGd2_7LDAiLj=w1280"},
-  {src:"images/Llama Color.jpg",              title:"No Drama Llama",                      year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB0Z2pFJSN4V5NPwUMd7DVZGRDsB29_0M5gRCwK2jmT8OKzh-ogZaigI9pVyKvkMAxINkEgLV9IKM35RAPVtgqd7nP_J5ine-IcksuokIiKun9MuIFGcXvVkLnSSeD-FKu23x21ozBKRFcuCmuK5Oy6qYlw4Zk5kWUuwAqgrcmbXsR4SX4Y1R1pnQ0YuOSqd9NW-h-dymdsBx44m_V7yaSfCmGKA0wcNm4UD1M9zfo=w1280"},
-  {src:"images/Polar Bear Cub Color.jpg",     title:"Chill Cub",                           year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDSNKmXwQHPb_ByGCZgi9kLbDN2tU9YJn8VzT9SsedghxPD3fkvfdzGKgWoKbXF0w-iFsiyx5yVTi2TNWIznjEMog_t92FsbY-guktkTtcjNRiCxRmbERqhiHK_YlS1s=w1280"},
-  {src:"images/Shiba Inu Color.jpg",          title:"Domo",                                year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUB3VVP7fZEl5P9YCNUTwt4A1TwM502nka3PPzwVcyccBcn_TBE4x_O-T9hRY88zn1Cx-LRM-0tUfAHNAbjX9u5zYvEFw9UE7QF6oAnfhEEb5HdugxeEIMxYMtxhCluEOMYWIf9Ia8CwCIlLB8mOr09rPxAg_HEBXVy-Yo4k2f9QXZjbCDkWblcDGnlNak0hn9ivFZwhXK1mSFCVrEpDRXA04zMIy5Xr7KKdiSBuVYY=w1280"},
-  {src:"images/Orca Color.jpg",               title:"Orca Clause",                         year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUC8XvZ0XkTh67lDD68W_Tg4A-kbvtwk3zbfXz6p61cNwtceBAV-jf8bVVZ5DsAQh57dJ2PbXJyAT6YFnrFgcU8vuprvoYMzih4h3kSTJkIKnpJZsFJmJteXsKKCJshN3ToOdr8FP1sUy1LrGxuwTv4NQGMipLg9CtygtNKOZc26LtEViVvR_80_0aZcwBxsj2cC0a2dChEs54iZ0BJzk3nCcOYahwegdLzzkh1I=w1280"},
-  {src:"images/GOATed.jpg",                   title:"GOATed",                              year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDw9Hds-7YjBFMleqxrg5N39pHcCpsGN05O4oEA5YcvyjrrzGbCuqSSj4OfcXP6YXIDTCWL_42gmCpF1nY8xjVJWSPAk-OnyuadfU2fn5-zYWYLGyA93LWGnCERf2zy8TU9K2n1SQYDlKM0jcl9q0G8y29K7E3fjtkFX8W3ohNhmMaYQNG8fLCi9C-ZFnY6kp8avA4NquyKDu3PDG1r9HV-0ZJTfLUVHcre9PbZj84=w1280"},
-  {src:"images/Bear.jpg",                     title:"Bear-y Nice to Meet You!",            year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUD2LJhd6MgMyQxQA1FcY2iBNwv5AWA1OTBSOg1w9jVsS8eNVIPgbMao4M2CzGEjxNqIY1xIj00012S3Bdc2EKuo3R0yerMfggeraYFYanVN5Awo-xz3xtryp4QR6317_qWSzsaYnuX0FGEeXWzbV8hIfzb_MYZWhsdy5W_ECdd8RoSRFEyWaL5hqJaz3FJ74Q1UEEaqjRxxoYfOAl82VpLhbjcMJoABBoF0oKcehqE=w1280"},
-  {src:"images/Cat Color.jpg",                title:"Purrfect Winter Day",                 year:"2024", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDhJdKNEx0m7WYiAILIKeVncRWcMtL9l1h-esBvM64DSiMmTAG2Vp8sfhi7vNycCqE-q8AxlJ_OeKt_6u6SejkY0pX7L-PK1aLJyPLjJ93SoDEAITvA-zfqpCUDoNYgtyu-2Gg_RqglqQNhrJSQQaCXweQDJ6XLtpZgiTwE4k3-EX3E8GaQvNe8BzZLgo_GoTDFxX5CFTov9YbP5AGiUO3EvKS1cGrcaBYdvG-9Lso=w1280"},
-  {src:"images/holiday owl.jpg",              title:"Owl Be Home For Christmas",           year:"2025", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUDMzPMg-eoyUnJB2wyZwpNfx-NaoZRlVcPcIXKtaKi8x5bAfy6w0FYwwDJNrX9faBRg583e3EgKKpSZRaVtLNGzxvz8xNVXfw4be9kI8sUZ61FbLqsqnzG5r0OMWXGnioMZsxp00OJP6I_IuLisfB0U63cDmSbiCJDl3IEqecOAe958HDufmBq5gmy93mmWf4Ys5uNAPwX2FWf69kVIUpAN03_Xg0JYaDKDN2j_15I=w1280"},
-  {src:"images/holiday bunny.jpg",            title:"Hoppy Holidays",                      year:"2025", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUBzilH6BEZssebE7HUIvMtX2HgkFaZmG8fwtaUOzISZ_4CXFiKmUC-mfBv4QkJNOtjbvEnObvRl038n4yX67Jgy6SEkgg5d6DUjB6fsw7_s80AqA_G-ddH8_RvmgGjYNjaVJODqAleTtI8xoaXbUrrJXs6ZoI9ZHgWpliN_eW7-RyBbzpA5GpZD_sfEYXYdOK8qDMyHbw6k10p1E1k4iDUyMQIfSIg--WOOkC9w=w1280"},
-  {src:"images/holiday cow.jpg",              title:"Moo-ry Christmas",                    year:"2025", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUBEDY77LTfPxsD4UqJEN6DgO3FcR_wVefYj0CEP2dEBoRbSc7_W0AdcHoS1Tf7yVm6tvYlMaHSmd7mzT_Oxz6RNM393HrS4w4f50REm_mhuVsRXJ3ox2TZJB6-E1XtYJHmi9Z4LLkJKiIPsB-FUSv2T5zkZN0NFJgKuuiodexq4N8VmgwonPlnJhbkP5pz8zXU4J0i0_ZRpJzJY7W2GmOHh8JSq-c7A3nsiAQSlY84=w1280"},
-  {src:"images/holiday raccoon.jpg",          title:"Raccoon",                             year:"2025", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUANnExx9jBapnJmYXkHgiH7KtCYMVdIKX_3qJ3vOtvUF147FmCI7R1cJ3ZndXtpDUCYUc0Xfkg9s2PByZ_ZdyuPLmHyKBjKKAq1apuonH1o0JCl39UA7-Q3H0A9iPKm0L68ioggb4xm_laHBYy7TbiXwiA_Uk_nLKtJCTFn0xkSyOlDoVPAoKPBwabLecCID_3DFG9OCxe4bqW7ixBSwyCr9UJrQ6CZt4E_VP0aAGfa-Tqe8WI-YF-TrHTFzEywHcJ=w1280"},
-  {src:"images/lion.jpg",                     title:"Lion Around",                         year:"2026", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUCEbGEXEfcDtgnVd2qikDoPVuNg2PHIeS8Oh0pRbELSqzxYUBrsCjp44-56jRCHss15k06vHv75jFEfESFxKEArHcPW73BeEvkSkdq8VGHFQqD1VqpDZtTBN0NAvt866-fQEcVkZEls_KokAs0fKCbgvoKPEUvzF9LaqBo1se67efNwQ_a0L2i2PjBzLVRwtISxcAGLGPA=w1280"},
-  {src:"images/horse.jpg",                    title:"Horseplay",                           year:"2026", fb:"https://lh3.googleusercontent.com/sitesv/AA5AbUAzEbT9fxHluO8KJBBnuFuzLaJFtkJ00fqFAGF7MdmuBlqfSlYzsU4kqtKSBlMiX5B8dssCLq6HDLiDaAKAQ2hf5qISI1IVVAljIqdM6tOcdU_LdiTOq_u9zkIDipGuRNWlkWfDLLm2OlYtTyZ5myM3BYvJW9i4JEFukpROonRlLFoLDF1YPlOuvrQ8SQ7TNmdUuHSYf7k-5DAjKpd1d46pflhf93c1ROUjhe=w1280"},
+  {src:"images/Otter.jpg",                    title:"Hello from the Otter Side",           year:"2023"},
+  {src:"images/House of the Dogon.JPG",       title:"House of the Dogon",                  year:"2023"},
+  {src:"images/Coral Cuttle Buddies.jpg",     title:"Coral Cuttle Buddies",                year:"2023"},
+  {src:"images/Piggy.jpg",                    title:"This Little Piggy Went to Market",    year:"2023"},
+  {src:"images/Black Fin Shark.jpg",          title:"Lone Shark",                          year:"2023"},
+  {src:"images/Sunset Ladybugs.jpg",          title:"Sunset Ladybugs",                     year:"2023"},
+  {src:"images/Polarizing.jpg",               title:"Polarizing",                          year:"2023"},
+  {src:"images/Whale.jpg",                    title:"Hump Day",                            year:"2023"},
+  {src:"images/Humpback Whale.jpg",           title:"Humpback Bubble Bath",                year:"2023"},
+  {src:"images/Party Without A Porpoise.jpg", title:"Party without a Porpoise",            year:"2023"},
+  {src:"images/Piff.jpg",                     title:"Piff's Playground",                   year:"2023"},
+  {src:"images/Giraffe.jpg",                  title:"Giraffe Manor",                       year:"2023"},
+  {src:"images/Golden Retriever.jpg",         title:"Dahlia's Pet",                        year:"2023"},
+  {src:"images/Horse and Corgi.jpg",          title:"Ruff Rider",                          year:"2023"},
+  {src:"images/Red Panda.jpg",                title:"Crimson Camouflage",                 year:"2023"},
+  {src:"images/lion.jpg",                     title:"The Mane Attraction",                 year:"2023"},
+  {src:"images/Kestrel.jpg",                  title:"Menstrual Kestrel",                   year:"2023"},
+  {src:"images/Elephant Monkey.jpg",          title:"Wild Companions",                     year:"2023"},
+  {src:"images/garfield_and_pookie.jpg",      title:"Garfield and Pookie",                 year:"circa 2004"},
+  {src:"images/Paco.JPG",                     title:"Paco's Trip to the Aquarium",         year:"2023"},
+  {src:"images/Chicken.jpg",                  title:"Chicken Chicken Me Love the Chicken", year:"2023"},
+  {src:"images/Shetland Pony.jpg",           title:"Lavender Dreams",                     year:"2023"},
+  {src:"images/octopus prime.jpg",            title:"Octopus Prime",                       year:"2024"},
+  {src:"images/rocky.jpg",                    title:"Rocky",                               year:"2024"},
+  {src:"images/Llama Color.jpg",              title:"No Drama Llama",                      year:"2024"},
+  {src:"images/Polar Bear Cub Color.jpg",     title:"Chill Cub",                           year:"2024"},
+  {src:"images/Shiba Inu Color.jpg",          title:"Domo",                                year:"2024"},
+  {src:"images/Orca Color.jpg",               title:"Orca Clause",                         year:"2024"},
+  {src:"images/GOATed.jpg",                   title:"GOATed",                              year:"2024"},
+  {src:"images/Bear.jpg",                     title:"Bear-y Nice to Meet You!",            year:"2024"},
+  {src:"images/Cat Color.jpg",                title:"Purrfect Winter Day",                 year:"2024"},
+  {src:"images/holiday owl.jpg",              title:"Owl Be Home For Christmas",           year:"2025"},
+  {src:"images/holiday bunny.jpg",            title:"Hoppy Holidays",                      year:"2025"},
+  {src:"images/holiday cow.jpg",              title:"Moo-ry Christmas",                    year:"2025"},
+  {src:"images/holiday raccoon.jpg",          title:"Raccoon",                             year:"2025"},
+  {src:"images/lion.jpg",                     title:"Lion Around",                         year:"2026"},
+  {src:"images/horse.jpg",                    title:"Horseplay",                           year:"2026"},
 ];
 
 
@@ -224,8 +224,8 @@ function buildGallery(items){
   items.forEach((a,i)=>{
     const c=document.createElement('div');c.className='art-card';
     const img=new Image();img.alt=a.title;img.loading='lazy';
-    img.onerror=()=>{img.onerror=null;img.src=a.fb;};
-    img.onerror=function(){this.onerror=null;this.src=a.fb;};
+    
+    
     img.src=a.src;
     c.appendChild(img);
     const ov=document.createElement('div');ov.className='art-card-overlay';
@@ -239,7 +239,7 @@ function filterGallery(y,b){document.querySelectorAll('.filter-btn').forEach(x=>
 function openLB(i,items){
   ci=i;
   const lbImg=document.getElementById('lb-img');
-  lbImg.onerror=function(){this.onerror=null;this.src=items[i].fb;};
+  
   lbImg.src=items[i].src;
   document.getElementById('lb-title').textContent=items[i].title+' · '+items[i].year;
   document.getElementById('lightbox').classList.add('open');
