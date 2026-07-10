@@ -3,106 +3,279 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Bearly Employed</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<title>Sasha De Silva - About</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--black:#0E0E0F;--off:#18181A;--border:#2E2E30;--cream:#F5F2EC;--muted:#888;--accent:#E8C44A;--panda:#5BAD8F;}
-html,body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;}
-a{color:inherit;text-decoration:none;}
-nav{position:sticky;top:0;z-index:100;background:rgba(14,14,15,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--cream);}
-.nav-logo span{color:var(--accent);}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--cream);}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer;}
-.hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);}
-.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:var(--off);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:99;flex-direction:column;gap:1.2rem;}
-.mobile-menu a{font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+:root{--cream:#FAF7F2;--ink:#2C2420;--ink-light:#6B5E56;--rose:#C47A6E;--teal:#4A8B85;--amber:#C4883A;--purple:#8B7ABE;--green:#4A6741;}
+html,body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;cursor:none;}
+a,button{cursor:none!important;}
+#cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:99999;width:40px;height:52px;transform:translate(-20px,-42px) rotate(135deg);transform-origin:20px 42px;}
+#cursor svg{width:40px;height:52px;display:block;}
+.cursor-drip{opacity:0;transition:opacity 0.15s;}
+body.hovering .cursor-drip{opacity:1;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(250,247,242,0.93);backdrop-filter:blur(8px);border-bottom:1px solid rgba(44,36,32,0.08);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;text-decoration:none;}
+.nav-logo img{height:38px;width:auto;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--rose);}
+.nav-links a.active{color:var(--ink);border-bottom:1.5px solid var(--rose);padding-bottom:2px;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(44,36,32,0.1);padding:1.5rem 2rem;z-index:99;flex-direction:column;gap:1.2rem;}
+.mobile-menu a{font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);text-decoration:none;}
 .mobile-menu.open{display:flex;}
-@media(max-width:700px){nav{padding:0 1.5rem;}.nav-links{display:none;}.hamburger{display:flex;}}
-.content{max-width:760px;margin:0 auto;padding:5rem 2.5rem;}
-h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:800;letter-spacing:-0.02em;color:var(--cream);margin-bottom:2rem;}
-h1 em{font-style:normal;color:var(--accent);}
-h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:var(--cream);margin:2.5rem 0 0.8rem;}
-.body-text{font-size:1rem;color:var(--muted);line-height:1.85;margin-bottom:1.2rem;}
-.stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin:2rem 0;}
-@media(max-width:560px){.stack-grid{grid-template-columns:1fr 1fr;}}
-.stack-pill{background:var(--off);border:1px solid var(--border);border-radius:6px;padding:0.8rem 1rem;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:center;}
-.contact-row{display:flex;gap:1rem;margin-top:3rem;flex-wrap:wrap;}
-.contact-btn{display:inline-block;background:var(--panda);color:var(--black);font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.8rem 1.8rem;border-radius:100px;transition:opacity 0.2s;}
-.contact-btn:hover{opacity:0.85;}
-.divider{border:none;border-top:1px solid var(--border);margin:3rem 0;}
-footer{padding:2rem 2.5rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--cream);}
-.footer-logo span{color:var(--accent);}
-.footer-links{display:flex;gap:1.5rem;list-style:none;}
-.footer-links a{font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
-.footer-links a:hover{color:var(--cream);}
-.footer-copy{font-size:0.7rem;color:var(--border);}
+@media(max-width:750px){nav{padding:0 1.5rem;}.nav-links{display:none;}.hamburger{display:flex;}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.12s;}.d2{transition-delay:.24s;}.d3{transition-delay:.38s;}.d4{transition-delay:.52s;}
+
+.sep{display:flex;align-items:center;gap:1.5rem;padding:0 2.5rem;max-width:1100px;margin:0 auto;}
+.sep-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(44,36,32,0.15),transparent);}
+.sep-glyph{font-family:'Playfair Display',serif;font-size:1rem;color:var(--rose);opacity:0.5;user-select:none;flex-shrink:0;}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;}
+.hero-bg{position:absolute;inset:-120px;z-index:0;
+  background:radial-gradient(ellipse 50% 50% at 15% 20%,rgba(196,122,110,0.28) 0%,transparent 70%),
+  radial-gradient(ellipse 40% 55% at 85% 10%,rgba(74,139,133,0.22) 0%,transparent 70%),
+  radial-gradient(ellipse 55% 30% at 50% 95%,rgba(139,122,190,0.18) 0%,transparent 70%);
+  will-change:transform;}
+.hero-content{position:relative;z-index:1;max-width:680px;}
+.hero-eyebrow{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--rose);margin-bottom:1.2rem;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,4.5rem);font-weight:400;line-height:1.08;color:var(--ink);}
+h1 em{font-style:italic;color:var(--rose);}
+.hero-rule{display:flex;align-items:center;gap:1rem;margin:2rem auto 0;max-width:180px;}
+.hero-rule::before,.hero-rule::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);}
+.hero-rule-dot{width:5px;height:5px;border-radius:50%;background:var(--rose);opacity:0.6;}
+
+/* BIO SECTION */
+.bio-section{padding:5rem 2.5rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start;}
+@media(max-width:800px){.bio-section{grid-template-columns:1fr;gap:3rem;}}
+.bio-portrait{position:relative;}
+.bio-portrait-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;display:block;}
+.bio-portrait-placeholder{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,rgba(196,122,110,0.12),rgba(74,139,133,0.1));border-radius:4px;display:flex;align-items:center;justify-content:center;}
+.bio-portrait-placeholder svg{opacity:0.18;width:80px;height:80px;}
+.bio-text{}
+.bio-eyebrow{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem;}
+.bio-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:1.8rem;}
+.bio-text h2 em{font-style:italic;color:var(--rose);}
+.bio-body{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:300;color:var(--ink-light);line-height:1.85;}
+.bio-body p+p{margin-top:1.2rem;}
+
+/* DISCIPLINES */
+.disciplines-section{padding:4rem 2.5rem 5rem;max-width:1100px;margin:0 auto;}
+.disciplines-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;}
+@media(max-width:700px){.disciplines-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:420px){.disciplines-grid{grid-template-columns:1fr;}}
+.discipline-card{padding:2rem 1.6rem;border:1px solid rgba(44,36,32,0.1);border-radius:4px;transition:border-color 0.2s,transform 0.2s;}
+.discipline-card:hover{border-color:var(--rose);transform:translateY(-3px);}
+.discipline-icon{font-size:1.6rem;margin-bottom:1rem;line-height:1;}
+.discipline-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--ink);margin-bottom:0.5rem;}
+.discipline-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--ink-light);line-height:1.6;}
+.discipline-link{display:inline-block;margin-top:1rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;}
+.discipline-link:hover{border-color:var(--rose);}
+
+/* CURRENTLY */
+.currently-section{background:var(--ink);padding:5rem 2.5rem;text-align:center;}
+.currently-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--cream);margin-bottom:2.5rem;}
+.currently-section h2 em{font-style:italic;color:#D4A898;}
+.currently-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:900px;margin:0 auto;}
+@media(max-width:600px){.currently-grid{grid-template-columns:1fr;}}
+.currently-item{text-align:left;}
+.currently-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,247,242,0.4);margin-bottom:0.5rem;}
+.currently-value{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:rgba(250,247,242,0.8);line-height:1.5;}
+
+/* CONTACT */
+.contact-section{padding:5rem 2.5rem;max-width:600px;margin:0 auto;text-align:center;}
+.contact-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--ink);margin-bottom:1rem;}
+.contact-section h2 em{font-style:italic;color:var(--rose);}
+.contact-section p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--ink-light);line-height:1.7;margin-bottom:2rem;}
+.contact-email{display:inline-block;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose);text-decoration:none;border-bottom:1px solid var(--rose);padding-bottom:2px;transition:opacity 0.2s;}
+.contact-email:hover{opacity:0.7;}
+.contact-divider{width:40px;height:1px;background:var(--rose);margin:2rem auto;opacity:0.4;}
+
+footer{border-top:1px solid rgba(44,36,32,0.1);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{display:flex;align-items:center;text-decoration:none;}
+.footer-logo img{height:28px;width:auto;opacity:0.7;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--rose);}
+.footer-copy{font-size:0.7rem;color:rgba(107,94,86,0.45);}
 @media(max-width:600px){footer{flex-direction:column;text-align:center;align-items:center;}}
 </style>
 </head>
 <body>
+
+<div id="cursor">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 52">
+    <rect x="17" y="1" width="6" height="20" rx="2" fill="#8B7040"/>
+    <rect x="15.5" y="19" width="9" height="5" rx="1" fill="#C4B89A"/>
+    <ellipse cx="20" cy="33" rx="5.5" ry="9" fill="#C47A6E"/>
+    <line x1="18" y1="25" x2="17" y2="41" stroke="#9B4E42" stroke-width="0.9" opacity="0.55"/>
+    <line x1="20" y1="24" x2="20" y2="42" stroke="#9B4E42" stroke-width="0.9" opacity="0.55"/>
+    <line x1="22" y1="25" x2="23" y2="41" stroke="#9B4E42" stroke-width="0.9" opacity="0.55"/>
+    <ellipse cx="20" cy="41" rx="2.5" ry="2" fill="#7A3A2E"/>
+    <g class="cursor-drip">
+      <ellipse cx="20.5" cy="44.5" rx="2.2" ry="1.5" fill="#C47A6E" opacity="0.95"/>
+      <ellipse cx="21" cy="47.5" rx="1.5" ry="1.3" fill="#C47A6E" opacity="0.75"/>
+      <circle cx="21.5" cy="50.5" r="1" fill="#C47A6E" opacity="0.5"/>
+    </g>
+  </svg>
+</div>
+
 <nav>
-  <a href="index.html" class="nav-logo">Bearly Employed</a>
+  <a href="index.html" class="nav-logo"><img src="sdlogo_no_bg.png" alt="Sasha De Silva"></a>
   <ul class="nav-links">
-    <li><a href="index.html">Games</a></li>
-    <li><a href="pandahunt.html">Panda Hunt</a></li>
-    <li><a href="bearlysudoku.html">Bearly Sudoku</a></li>
-    <li><a href="support.html">Support</a></li>
+    <li><a href="watercolor.html">Watercolor</a></li>
+    <li><a href="digital.html">Digital</a></li>
+    <li><a href="embroidery.html">Embroidery</a></li>
+    <li><a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator" target="_blank">Hybrid Generator</a></li>
+    <li><a href="https://bearlyemployed.github.io/games/index.html" target="_blank">Developer</a></li>
     <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Games</a>
-  <a href="pandahunt.html">Panda Hunt</a>
-  <a href="bearlysudoku.html">Bearly Sudoku</a>
-  <a href="support.html">Support</a>
+  <a href="index.html">← Home</a>
+  <a href="watercolor.html">Watercolor Animals</a>
+  <a href="digital.html">Digital Drawings</a>
+  <a href="embroidery.html">Embroidery</a>
+  <a href="https://bearlyemployed.github.io/games/index.html" target="_blank">Developer Site</a>
   <a href="about.html">About</a>
 </div>
 
-<div class="content">
-  <h1>Bearly<br><em>Employed.</em></h1>
-  <p class="body-text">Bearly Employed is a one-person iOS game studio. Every pixel, every note, every line of code is made solo - no team, no investors, no ads.</p>
-  <p class="body-text">The goal is simple: build small, polished, ad-free mobile games that I'd actually want to play. Games that respect your time and your intelligence. Games that are just... fun.</p>
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal">The maker behind the work</p>
+    <h1 class="reveal d1">Sasha<br><em>De Silva</em></h1>
+    <div class="hero-rule reveal d2"><div class="hero-rule-dot"></div></div>
+  </div>
+</section>
 
-  <h2>The stack</h2>
-  <div class="stack-grid">
-    <div class="stack-pill">SwiftUI</div>
-    <div class="stack-pill">iOS</div>
-    <div class="stack-pill">Game Center</div>
-    <div class="stack-pill">StoreKit 2</div>
-    <div class="stack-pill">Python</div>
-    <div class="stack-pill">Xcode</div>
+<div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
+
+<section class="bio-section">
+  <div class="bio-portrait reveal">
+    <!-- Replace src with your actual portrait photo: images/portrait.jpg -->
+    <img src="images/portrait.jpg" alt="Sasha De Silva" class="bio-portrait-img"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="bio-portrait-placeholder" style="display:none;">
+      <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="28" r="16" stroke="#C47A6E" stroke-width="2"/><path d="M8 72c0-17.7 14.3-32 32-32s32 14.3 32 32" stroke="#C47A6E" stroke-width="2"/></svg>
+    </div>
   </div>
 
-  <hr class="divider">
-
-  <h2>The philosophy</h2>
-  <p class="body-text">No ads. Ever. It's just not the kind of experience I want to build - I'd rather keep games sustained through optional purchases that feel fair, like cosmetics and convenience, never pay-to-win.</p>
-  <p class="body-text">Offline first. Every game works without an internet connection because your time shouldn't depend on signal strength.</p>
-  <p class="body-text">Built for all ages. Games should be accessible and welcoming. No dark patterns, no countdown timers designed to create anxiety, no gotcha mechanics.</p>
-
-  <hr class="divider">
-
-  <h2>Say hello</h2>
-  <p class="body-text">Questions, feedback, bug reports, or just want to chat about games - I'd love to hear from you.</p>
-  <div class="contact-row">
-    <a href="mailto:bearlyemployed@gmail.com" class="contact-btn">bearlyemployed@gmail.com</a>
+  <div class="bio-text">
+    <p class="bio-eyebrow reveal">About me</p>
+    <h2 class="reveal d1">Artist, developer,<br><em>creature enthusiast.</em></h2>
+    <div class="bio-body reveal d2">
+      <p>I'm Sasha De Silva - a multidisciplinary artist based in New York City with a soft spot for animals, puns, and the slow meditative act of making something by hand.</p>
+      <p>My work spans watercolor painting, digital illustration, and embroidery. Each medium asks something different of me - watercolor demands surrender, digital demands precision, and embroidery demands patience - but they all share the same goal: finding something true in the subject and bringing it out.</p>
+      <p>Animals are my recurring muse. I'm drawn to the way they carry emotion without self-consciousness - the dignity of a giraffe, the chaos of an otter, the absurdity of a pun-named penguin. I try to honor that in every piece.</p>
+      <p>Alongside the fine art practice I run <a href="https://bearlyemployed.github.io/games/index.html" target="_blank" style="color:var(--rose);text-decoration:none;border-bottom:1px solid var(--rose);">Bearly Employed</a>, an indie iOS game and app studio where I build and publish SwiftUI games on the App Store.</p>
+    </div>
   </div>
-</div>
+</section>
+
+<div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
+
+<section class="disciplines-section">
+  <div class="reveal">
+    <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose);margin-bottom:0.6rem;">What I make</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;color:var(--ink);">Disciplines</h2>
+  </div>
+  <div class="disciplines-grid">
+    <div class="discipline-card reveal d1">
+      <div class="discipline-icon">🎨</div>
+      <p class="discipline-title">Watercolor Animals</p>
+      <p class="discipline-desc">Luminous animal portraits painted on paper - wildlife, pets, and the occasional holiday cameo.</p>
+      <a href="watercolor.html" class="discipline-link">View the series →</a>
+    </div>
+    <div class="discipline-card reveal d2">
+      <div class="discipline-icon">✏️</div>
+      <p class="discipline-title">Digital Drawings</p>
+      <p class="discipline-desc">Characters and creatures drawn on screen, exploring illustration in the digital realm.</p>
+      <a href="digital.html" class="discipline-link">View the series →</a>
+    </div>
+    <div class="discipline-card reveal d3">
+      <div class="discipline-icon">🧵</div>
+      <p class="discipline-title">Embroidery</p>
+      <p class="discipline-desc">Needle and thread - my current obsession. Each stitch placed with deliberate intention.</p>
+      <a href="embroidery.html" class="discipline-link">View the series →</a>
+    </div>
+    <div class="discipline-card reveal d1">
+      <div class="discipline-icon">🧬</div>
+      <p class="discipline-title">Hybrid Generator</p>
+      <p class="discipline-desc">An interactive web tool for combining animal parts into strange and wonderful hybrids.</p>
+      <a href="https://sites.google.com/view/sashadesilva/hybrid-animal-generator" target="_blank" class="discipline-link">Try it →</a>
+    </div>
+    <div class="discipline-card reveal d2">
+      <div class="discipline-icon">📱</div>
+      <p class="discipline-title">iOS Development</p>
+      <p class="discipline-desc">SwiftUI games and apps published on the App Store under the Bearly Employed studio.</p>
+      <a href="https://bearlyemployed.github.io/games/index.html" target="_blank" class="discipline-link">Visit the studio →</a>
+    </div>
+    <div class="discipline-card reveal d3">
+      <div class="discipline-icon">📷</div>
+      <p class="discipline-title">Photography</p>
+      <p class="discipline-desc">Photography and videography through Images by Aaron - visual storytelling beyond the studio.</p>
+      <a href="https://www.instagram.com/images_by_aaron/" target="_blank" class="discipline-link">View on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
+
+<section class="currently-section">
+  <h2 class="reveal">Currently <em>making</em></h2>
+  <div class="currently-grid">
+    <div class="currently-item reveal d1">
+      <p class="currently-label">Painting</p>
+      <p class="currently-value">Watercolor animals - 37 works and counting</p>
+    </div>
+    <div class="currently-item reveal d2">
+      <p class="currently-label">Stitching</p>
+      <p class="currently-value">Embroidery pieces - ongoing obsession</p>
+    </div>
+    <div class="currently-item reveal d3">
+      <p class="currently-label">Building</p>
+      <p class="currently-value">Panda Hunt v1.1 - Game Center &amp; IAPs</p>
+    </div>
+  </div>
+</section>
+
+<div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
+
+<section class="contact-section" id="contact">
+  <h2 class="reveal">Say <em>hello</em></h2>
+  <p class="reveal d1">Commissions, collaborations, or just want to talk about otters? I'd love to hear from you.</p>
+  <div class="contact-divider reveal d2"></div>
+  <a href="mailto:bearlyemployed@gmail.com" class="contact-email reveal d3">bearlyemployed@gmail.com</a>
+</section>
+
+<div class="sep reveal"><div class="sep-line"></div><div class="sep-glyph">✦</div><div class="sep-line"></div></div>
 
 <footer>
-  <a href="index.html" class="footer-logo">Bearly Employed</a>
-  <ul class="footer-links">
-    <li><a href="support.html">Support</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-  <p class="footer-copy">© Bearly Employed</p>
+  <a href="index.html" class="footer-logo"><img src="sdlogo_no_bg.png" alt="Sasha De Silva"></a>
+  
+  <p class="footer-copy">© Sasha De Silva</p>
 </footer>
-<script>function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}</script>
+
+<script>
+const cur=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';},{passive:true});
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));});
+const heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll',()=>{heroBg.style.transform='translateY('+(window.scrollY*0.7)+'px)';},{passive:true});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.hero .reveal').forEach(el=>setTimeout(()=>el.classList.add('visible'),80));
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+</script>
 </body>
 </html>
